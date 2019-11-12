@@ -21,6 +21,7 @@ dev_dependencies:
   pedantic: ^1.8.0+1
   mobx_codegen: ^0.3.10
   build_runner: ^1.7.1
+  mockito: ^4.1.1
   flutter_test:
     sdk: flutter
 

@@ -7,12 +7,12 @@ import 'package:beyond/ui/navigation_manager.dart';
 import 'package:mockito/mockito.dart';
 
 class TestServiceLocator extends ServiceLocator {
-  TestServiceLocator() {
+  TestServiceLocator() : super.empty() {
     // Mocks
     sharedPreferencesService = MockSharedPreferencesService();
+    apiService = MockApiService();
 
     // Real
-    apiService = ApiService();
     authManager = AuthManager(apiService, sharedPreferencesService);
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);
@@ -21,3 +21,5 @@ class TestServiceLocator extends ServiceLocator {
 
 class MockSharedPreferencesService extends Mock
     implements SharedPreferencesService {}
+
+class MockApiService extends Mock implements ApiService {}

@@ -19,6 +19,7 @@ class ServiceLocator implements Startable {
   /// Global State
   AuthManager authManager;
 
+  /// Creates a new container for our services and instantiates them
   ServiceLocator() {
     apiService = ApiService();
     sharedPreferencesService = SharedPreferencesService();
@@ -27,6 +28,10 @@ class ServiceLocator implements Startable {
     navigationManager = NavigationManager(viewModelFactory, authManager);
   }
 
+  /// For testing
+  ServiceLocator.empty();
+
+  /// Runs any required startup code for all our services
   @override
   Future start() async {
     // Order can be important here if the services depend on each other

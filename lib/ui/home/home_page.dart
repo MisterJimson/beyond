@@ -11,6 +11,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
       body: SafeArea(
         child: Observer(builder: (_) {
           return Padding(
@@ -18,7 +21,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                if (viewModel.currentPlace != null) _buildCurrentPlace(),
+                if (viewModel.placeDesc != null) _buildCurrentPlace(),
                 SizedBox(height: 10),
                 _buildParks(),
                 Spacer(),
@@ -37,35 +40,47 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildParks() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Nearby Parks",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Card(
+      elevation: 10,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Nearby Parks",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            ...viewModel.pointsOfInterest
+                .map(
+                  (x) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Text(x.nameAndDistance),
+                  ),
+                )
+                .toList()
+          ],
         ),
-        ...viewModel.pointsOfInterest
-            .map(
-              (x) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Text("${x.name} is ${x.distance} meters away"),
-              ),
-            )
-            .toList()
-      ],
+      ),
     );
   }
 
   Widget _buildCurrentPlace() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Current Location",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Card(
+      elevation: 10,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Current Location",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(viewModel.placeDesc),
+          ],
         ),
-        Text(viewModel.placeDesc),
-      ],
+      ),
     );
   }
 

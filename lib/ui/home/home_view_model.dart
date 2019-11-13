@@ -12,14 +12,10 @@ abstract class _HomeViewModel with Store {
   final ApiService _apiService;
 
   @observable
-  Place currentPlace;
-
-  @computed
-  String get placeDesc =>
-      "${currentPlace.address.houseNumber ?? ""} ${currentPlace.address.road}";
+  String placeDesc = "";
 
   @observable
-  List<PointOfInterest> pointsOfInterest = [];
+  List<Park> pointsOfInterest = [];
 
   _HomeViewModel(this._authManager, this._apiService) {
     getLocation();
@@ -30,14 +26,20 @@ abstract class _HomeViewModel with Store {
     var position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
     _apiService.getPlace(position.longitude, position.latitude).then((x) {
-      currentPlace = x.data;
+      if (x.isSuccess) {
+        placeDesc =
+            "${x.data.address.houseNumber ?? ""} ${x.data.address.road}";
+      }
     });
 
     _apiService
         .getPointsOfInterest(position.longitude, position.latitude, "park")
         .then((x) {
       if (x.isSuccess) {
-        pointsOfInterest = x.data.where((x) => x.name != null).toList();
+        pointsOfInterest = x.data
+            .where((x) => x.name != null)
+            .map((x) => Park("${x.name} is ${x.distance} meters away"))
+            .toList();
       }
     });
   }
@@ -45,4 +47,10 @@ abstract class _HomeViewModel with Store {
   void logout() {
     _authManager.logout();
   }
+}
+
+class Park {
+  String nameAndDistance;
+
+  Park(this.nameAndDistance);
 }

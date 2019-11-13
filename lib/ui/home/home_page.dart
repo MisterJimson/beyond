@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:beyond/ui/home/home_view_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatelessWidget {
   final HomeViewModel viewModel;
@@ -15,26 +16,24 @@ class HomePage extends StatelessWidget {
         title: Text("Home"),
       ),
       body: SafeArea(
-        child: Observer(builder: (_) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                if (viewModel.placeDesc != null) _buildCurrentPlace(),
-                SizedBox(height: 10),
-                _buildParks(),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildLogoutButton(),
-                  ],
-                ),
-              ],
-            ),
-          );
-        }),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildCurrentPlace(),
+              SizedBox(height: 10),
+              _buildParks(),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildLogoutButton(),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -44,22 +43,33 @@ class HomePage extends StatelessWidget {
       elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Nearby Parks",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            ...viewModel.pointsOfInterest
-                .map(
-                  (x) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Text(x.nameAndDistance),
-                  ),
-                )
-                .toList()
-          ],
+        child: Observer(
+          builder: (_) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Nearby Parks",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                if (viewModel.isPointsOfInterestLoading) ...[
+                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
+                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
+                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
+                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
+                ] else
+                  ...viewModel.nearbyParks
+                      .map(
+                        (x) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Text(x.nameAndDistance),
+                        ),
+                      )
+                      .toList(),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -77,9 +87,32 @@ class HomePage extends StatelessWidget {
               "Current Location",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(viewModel.placeDesc),
+            SizedBox(height: 5),
+            Observer(
+              builder: (_) {
+                return viewModel.isCurrentLocationLoading
+                    ? _buildLoadingShimmer()
+                    : Text(viewModel.currentLocation);
+              },
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingShimmer(
+      {double verticalPadding = 0, double shimmerWidth = 100}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: verticalPadding),
+      child: Shimmer.fromColors(
+        child: Container(
+          color: Colors.white,
+          width: shimmerWidth,
+          height: 17,
+        ),
+        baseColor: Colors.grey[200],
+        highlightColor: Colors.white,
       ),
     );
   }

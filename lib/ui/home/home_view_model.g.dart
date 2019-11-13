@@ -9,44 +9,93 @@ part of 'home_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeViewModel on _HomeViewModel, Store {
-  final _$placeDescAtom = Atom(name: '_HomeViewModel.placeDesc');
+  final _$currentLocationAtom = Atom(name: '_HomeViewModel.currentLocation');
 
   @override
-  String get placeDesc {
-    _$placeDescAtom.context.enforceReadPolicy(_$placeDescAtom);
-    _$placeDescAtom.reportObserved();
-    return super.placeDesc;
+  String get currentLocation {
+    _$currentLocationAtom.context.enforceReadPolicy(_$currentLocationAtom);
+    _$currentLocationAtom.reportObserved();
+    return super.currentLocation;
   }
 
   @override
-  set placeDesc(String value) {
-    _$placeDescAtom.context.conditionallyRunInAction(() {
-      super.placeDesc = value;
-      _$placeDescAtom.reportChanged();
-    }, _$placeDescAtom, name: '${_$placeDescAtom.name}_set');
+  set currentLocation(String value) {
+    _$currentLocationAtom.context.conditionallyRunInAction(() {
+      super.currentLocation = value;
+      _$currentLocationAtom.reportChanged();
+    }, _$currentLocationAtom, name: '${_$currentLocationAtom.name}_set');
   }
 
-  final _$pointsOfInterestAtom = Atom(name: '_HomeViewModel.pointsOfInterest');
+  final _$isCurrentLocationLoadingAtom =
+      Atom(name: '_HomeViewModel.isCurrentLocationLoading');
 
   @override
-  List<Park> get pointsOfInterest {
-    _$pointsOfInterestAtom.context.enforceReadPolicy(_$pointsOfInterestAtom);
-    _$pointsOfInterestAtom.reportObserved();
-    return super.pointsOfInterest;
+  bool get isCurrentLocationLoading {
+    _$isCurrentLocationLoadingAtom.context
+        .enforceReadPolicy(_$isCurrentLocationLoadingAtom);
+    _$isCurrentLocationLoadingAtom.reportObserved();
+    return super.isCurrentLocationLoading;
   }
 
   @override
-  set pointsOfInterest(List<Park> value) {
-    _$pointsOfInterestAtom.context.conditionallyRunInAction(() {
-      super.pointsOfInterest = value;
-      _$pointsOfInterestAtom.reportChanged();
-    }, _$pointsOfInterestAtom, name: '${_$pointsOfInterestAtom.name}_set');
+  set isCurrentLocationLoading(bool value) {
+    _$isCurrentLocationLoadingAtom.context.conditionallyRunInAction(() {
+      super.isCurrentLocationLoading = value;
+      _$isCurrentLocationLoadingAtom.reportChanged();
+    }, _$isCurrentLocationLoadingAtom,
+        name: '${_$isCurrentLocationLoadingAtom.name}_set');
   }
 
-  final _$getLocationAsyncAction = AsyncAction('getLocation');
+  final _$nearbyParksAtom = Atom(name: '_HomeViewModel.nearbyParks');
 
   @override
-  Future getLocation() {
-    return _$getLocationAsyncAction.run(() => super.getLocation());
+  List<Park> get nearbyParks {
+    _$nearbyParksAtom.context.enforceReadPolicy(_$nearbyParksAtom);
+    _$nearbyParksAtom.reportObserved();
+    return super.nearbyParks;
+  }
+
+  @override
+  set nearbyParks(List<Park> value) {
+    _$nearbyParksAtom.context.conditionallyRunInAction(() {
+      super.nearbyParks = value;
+      _$nearbyParksAtom.reportChanged();
+    }, _$nearbyParksAtom, name: '${_$nearbyParksAtom.name}_set');
+  }
+
+  final _$isPointsOfInterestLoadingAtom =
+      Atom(name: '_HomeViewModel.isPointsOfInterestLoading');
+
+  @override
+  bool get isPointsOfInterestLoading {
+    _$isPointsOfInterestLoadingAtom.context
+        .enforceReadPolicy(_$isPointsOfInterestLoadingAtom);
+    _$isPointsOfInterestLoadingAtom.reportObserved();
+    return super.isPointsOfInterestLoading;
+  }
+
+  @override
+  set isPointsOfInterestLoading(bool value) {
+    _$isPointsOfInterestLoadingAtom.context.conditionallyRunInAction(() {
+      super.isPointsOfInterestLoading = value;
+      _$isPointsOfInterestLoadingAtom.reportChanged();
+    }, _$isPointsOfInterestLoadingAtom,
+        name: '${_$isPointsOfInterestLoadingAtom.name}_set');
+  }
+
+  final _$_getCurrentLocationAsyncAction = AsyncAction('_getCurrentLocation');
+
+  @override
+  Future _getCurrentLocation(Position position) {
+    return _$_getCurrentLocationAsyncAction
+        .run(() => super._getCurrentLocation(position));
+  }
+
+  final _$_getNearbyParksAsyncAction = AsyncAction('_getNearbyParks');
+
+  @override
+  Future _getNearbyParks(Position position) {
+    return _$_getNearbyParksAsyncAction
+        .run(() => super._getNearbyParks(position));
   }
 }

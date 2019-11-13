@@ -12,36 +12,51 @@ abstract class _HomeViewModel with Store {
   final ApiService _apiService;
 
   @observable
-  String placeDesc = "";
+  String currentLocation = "";
 
   @observable
-  List<Park> pointsOfInterest = [];
+  bool isCurrentLocationLoading = true;
+
+  @observable
+  List<Park> nearbyParks = [];
+
+  @observable
+  bool isPointsOfInterestLoading = true;
 
   _HomeViewModel(this._authManager, this._apiService) {
-    getLocation();
+    getLocationData();
+  }
+
+  Future getLocationData() async {
+    var position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    _getCurrentLocation(position);
+    _getNearbyParks(position);
   }
 
   @action
-  Future getLocation() async {
-    var position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
-    _apiService.getPlace(position.longitude, position.latitude).then((x) {
-      if (x.isSuccess) {
-        placeDesc =
-            "${x.data.address.houseNumber ?? ""} ${x.data.address.road}";
-      }
-    });
+  Future _getCurrentLocation(Position position) async {
+    isCurrentLocationLoading = true;
+    var x = await _apiService.getPlace(position.longitude, position.latitude);
+    if (x.isSuccess) {
+      currentLocation =
+          "${x.data.address.houseNumber ?? ""} ${x.data.address.road}";
+    }
+    isCurrentLocationLoading = false;
+  }
 
-    _apiService
-        .getPointsOfInterest(position.longitude, position.latitude, "park")
-        .then((x) {
-      if (x.isSuccess) {
-        pointsOfInterest = x.data
-            .where((x) => x.name != null)
-            .map((x) => Park("${x.name} is ${x.distance} meters away"))
-            .toList();
-      }
-    });
+  @action
+  Future _getNearbyParks(Position position) async {
+    isPointsOfInterestLoading = true;
+    var x = await _apiService.getPointsOfInterest(
+        position.longitude, position.latitude, "park");
+    if (x.isSuccess) {
+      nearbyParks = x.data
+          .where((x) => x.name != null)
+          .map((x) => Park("${x.name} is ${x.distance} meters away"))
+          .toList();
+    }
+    isPointsOfInterestLoading = false;
   }
 
   void logout() {

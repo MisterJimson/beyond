@@ -1,6 +1,7 @@
 import 'package:beyond/infra/view_model_factory.dart';
 import 'package:beyond/manager/auth_manager.dart';
 import 'package:beyond/service/api_service.dart';
+import 'package:beyond/service/location_service.dart';
 import 'package:beyond/service/service_common.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
@@ -9,6 +10,7 @@ class ServiceLocator implements Startable {
   /// Services
   ApiService apiService;
   SharedPreferencesService sharedPreferencesService;
+  LocationService locationService;
 
   /// UI
   NavigationManager navigationManager;
@@ -23,6 +25,7 @@ class ServiceLocator implements Startable {
   ServiceLocator() {
     apiService = ApiService();
     sharedPreferencesService = SharedPreferencesService();
+    locationService = LocationService();
     authManager = AuthManager(apiService, sharedPreferencesService);
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);

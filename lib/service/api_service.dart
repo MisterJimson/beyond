@@ -14,7 +14,7 @@ class ApiService {
 
   Future<ApiResponse<Place>> getPlace(double longitude, double latitude) async {
     var response = await http.get(
-        "https://us1.locationiq.com/v1/reverse.php?key=${locationIqApiKey}&lat=$latitude&lon=$longitude&format=json");
+        "https://us1.locationiq.com/v1/reverse.php?key=$locationIqApiKey&lat=$latitude&lon=$longitude&format=json");
 
     if (_isSuccessStatusCode(response.statusCode)) {
       return ApiResponse(response.statusCode,
@@ -28,7 +28,7 @@ class ApiService {
       double longitude, double latitude, String type,
       {int radius = 500}) async {
     var response = await http.get(
-        "https://us1.locationiq.com/v1/nearby.php?key=${locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json");
+        "https://us1.locationiq.com/v1/nearby.php?key=$locationIqApiKey&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json");
 
     if (_isSuccessStatusCode(response.statusCode)) {
       Iterable list = json.decode(response.body);

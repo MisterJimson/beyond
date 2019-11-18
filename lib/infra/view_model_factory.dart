@@ -8,6 +8,6 @@ class ViewModelFactory {
   ViewModelFactory(this._locator);
 
   LoginViewModel get login => LoginViewModel(_locator.authManager);
-  HomeViewModel get home =>
-      HomeViewModel(_locator.authManager, _locator.apiService);
+  HomeViewModel get home => HomeViewModel(
+      _locator.authManager, _locator.apiService, _locator.locationService);
 }

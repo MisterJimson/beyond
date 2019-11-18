@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:beyond/ui/home/home_view_model.dart';
 import 'package:shimmer/shimmer.dart';
 

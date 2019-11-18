@@ -1,3 +1,4 @@
+import 'package:beyond/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/manager/auth_manager.dart';
@@ -10,6 +11,7 @@ class HomeViewModel = _HomeViewModel with _$HomeViewModel;
 abstract class _HomeViewModel with Store {
   final AuthManager _authManager;
   final ApiService _apiService;
+  final LocationService _locationService;
 
   @observable
   String currentLocation = "";
@@ -23,15 +25,24 @@ abstract class _HomeViewModel with Store {
   @observable
   bool isPointsOfInterestLoading = true;
 
-  _HomeViewModel(this._authManager, this._apiService) {
+  _HomeViewModel(this._authManager, this._apiService, this._locationService) {
     getLocationData();
   }
 
+  @action
   Future getLocationData() async {
-    var position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
-    _getCurrentLocation(position);
-    _getNearbyParks(position);
+    var position = await _locationService.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.medium);
+
+    if (position != null &&
+        position.latitude != null &&
+        position.longitude != null) {
+      _getCurrentLocation(position);
+      _getNearbyParks(position);
+    } else {
+      isCurrentLocationLoading = false;
+      isPointsOfInterestLoading = false;
+    }
   }
 
   @action

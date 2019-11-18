@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
-                if (viewModel.isPointsOfInterestLoading) ...[
+                if (viewModel.isNearbyParksLoading) ...[
                   _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
                   _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
                   _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),

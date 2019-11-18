@@ -23,7 +23,7 @@ abstract class _HomeViewModel with Store {
   List<Park> nearbyParks = [];
 
   @observable
-  bool isPointsOfInterestLoading = true;
+  bool isNearbyParksLoading = true;
 
   _HomeViewModel(this._authManager, this._apiService, this._locationService) {
     getLocationData();
@@ -41,7 +41,7 @@ abstract class _HomeViewModel with Store {
       _getNearbyParks(position);
     } else {
       isCurrentLocationLoading = false;
-      isPointsOfInterestLoading = false;
+      isNearbyParksLoading = false;
     }
   }
 
@@ -58,7 +58,7 @@ abstract class _HomeViewModel with Store {
 
   @action
   Future _getNearbyParks(Position position) async {
-    isPointsOfInterestLoading = true;
+    isNearbyParksLoading = true;
     var x = await _apiService.getPointsOfInterest(
         position.longitude, position.latitude, "park");
     if (x.isSuccess) {
@@ -67,7 +67,7 @@ abstract class _HomeViewModel with Store {
           .map((x) => Park("${x.name} is ${x.distance} meters away"))
           .toList();
     }
-    isPointsOfInterestLoading = false;
+    isNearbyParksLoading = false;
   }
 
   void logout() {

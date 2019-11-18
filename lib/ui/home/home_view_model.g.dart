@@ -63,24 +63,24 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     }, _$nearbyParksAtom, name: '${_$nearbyParksAtom.name}_set');
   }
 
-  final _$isPointsOfInterestLoadingAtom =
-      Atom(name: '_HomeViewModel.isPointsOfInterestLoading');
+  final _$isNearbyParksLoadingAtom =
+      Atom(name: '_HomeViewModel.isNearbyParksLoading');
 
   @override
-  bool get isPointsOfInterestLoading {
-    _$isPointsOfInterestLoadingAtom.context
-        .enforceReadPolicy(_$isPointsOfInterestLoadingAtom);
-    _$isPointsOfInterestLoadingAtom.reportObserved();
-    return super.isPointsOfInterestLoading;
+  bool get isNearbyParksLoading {
+    _$isNearbyParksLoadingAtom.context
+        .enforceReadPolicy(_$isNearbyParksLoadingAtom);
+    _$isNearbyParksLoadingAtom.reportObserved();
+    return super.isNearbyParksLoading;
   }
 
   @override
-  set isPointsOfInterestLoading(bool value) {
-    _$isPointsOfInterestLoadingAtom.context.conditionallyRunInAction(() {
-      super.isPointsOfInterestLoading = value;
-      _$isPointsOfInterestLoadingAtom.reportChanged();
-    }, _$isPointsOfInterestLoadingAtom,
-        name: '${_$isPointsOfInterestLoadingAtom.name}_set');
+  set isNearbyParksLoading(bool value) {
+    _$isNearbyParksLoadingAtom.context.conditionallyRunInAction(() {
+      super.isNearbyParksLoading = value;
+      _$isNearbyParksLoadingAtom.reportChanged();
+    }, _$isNearbyParksLoadingAtom,
+        name: '${_$isNearbyParksLoadingAtom.name}_set');
   }
 
   final _$getLocationDataAsyncAction = AsyncAction('getLocationData');

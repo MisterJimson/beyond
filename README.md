@@ -4,7 +4,7 @@
 TODO
 ## State Management
 TODO
-## Service Location & Dependancy Injection
+## Service Location & Dependency Injection
 TODO
 ## Testing
 TODO

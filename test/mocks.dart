@@ -16,6 +16,9 @@ class TestServiceLocator extends ServiceLocator {
     authManager = AuthManager(apiService, sharedPreferencesService);
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);
+
+    when(apiService.getAuthToken(any, any))
+        .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
   }
 }
 

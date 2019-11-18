@@ -72,6 +72,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildPassword() {
     return TextField(
+      key: Key("passwordField"),
       obscureText: true,
       onChanged: (x) => viewModel.password = x,
       decoration: InputDecoration(
@@ -86,6 +87,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildEmail() {
     return TextField(
+      key: Key("emailField"),
       obscureText: false,
       onChanged: (x) => viewModel.username = x,
       decoration: InputDecoration(

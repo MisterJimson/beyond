@@ -1,5 +1,5 @@
+import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:beyond/infra/view_model_factory.dart';
-import 'package:beyond/manager/auth_manager.dart';
 import 'package:beyond/service/api_service.dart';
 import 'package:beyond/service/location_service.dart';
 import 'package:beyond/service/service_common.dart';

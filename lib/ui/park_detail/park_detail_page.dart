@@ -1,5 +1,6 @@
 import 'package:beyond/ui/park_detail/park_detail_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ParkDetailPage extends StatelessWidget {
   final ParkDetailViewModel viewModel;
@@ -9,7 +10,11 @@ class ParkDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Observer(builder: (_) {
+          return Text(viewModel.park.name);
+        }),
+      ),
       body: Container(),
     );
   }

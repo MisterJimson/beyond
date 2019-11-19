@@ -1,8 +1,9 @@
+import 'package:beyond/domain/manager/auth_manager.dart';
+import 'package:beyond/domain/models.dart';
 import 'package:beyond/service/location_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
-import 'package:beyond/manager/auth_manager.dart';
 import 'package:beyond/service/api_service.dart';
 
 part 'home_view_model.g.dart';
@@ -22,7 +23,7 @@ abstract class _HomeViewModel with Store {
   bool isCurrentLocationLoading = true;
 
   @observable
-  List<Park> nearbyParks = [];
+  List<ParkListItem> nearbyParks = [];
 
   @observable
   bool isNearbyParksLoading = true;
@@ -32,8 +33,8 @@ abstract class _HomeViewModel with Store {
     _getLocationData();
   }
 
-  Future viewPark(Park park) {
-    return _navigationManager.goToParkDetail();
+  Future viewPark(ParkListItem parkListItem) {
+    return _navigationManager.goToParkDetail(parkListItem.park);
   }
 
   @action
@@ -71,7 +72,7 @@ abstract class _HomeViewModel with Store {
     if (x.isSuccess) {
       nearbyParks = x.data
           .where((x) => x.name != null)
-          .map((x) => Park("${x.name} is ${x.distance} meters away"))
+          .map((x) => ParkListItem(Park(x.name, x.distance)))
           .toList();
     }
     isNearbyParksLoading = false;
@@ -82,8 +83,10 @@ abstract class _HomeViewModel with Store {
   }
 }
 
-class Park {
-  String nameAndDistance;
+class ParkListItem {
+  Park park;
 
-  Park(this.nameAndDistance);
+  ParkListItem(this.park);
+
+  String get nameAndDistance => "${park.name} is ${park.distance} meters away";
 }

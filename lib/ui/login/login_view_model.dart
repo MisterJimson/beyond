@@ -1,5 +1,5 @@
+import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:mobx/mobx.dart';
-import 'package:beyond/manager/auth_manager.dart';
 
 part 'login_view_model.g.dart';
 

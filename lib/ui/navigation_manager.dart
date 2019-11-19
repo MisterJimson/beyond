@@ -1,9 +1,10 @@
+import 'package:beyond/domain/manager/auth_manager.dart';
+import 'package:beyond/domain/models.dart';
 import 'package:beyond/ui/park_detail/park_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/infra/view_model_factory.dart';
-import 'package:beyond/manager/auth_manager.dart';
 import 'package:beyond/ui/home/home_page.dart';
 import 'package:beyond/ui/login/login_page.dart';
 
@@ -18,15 +19,15 @@ class NavigationManager extends NavigatorObserver {
   }
 
   Future resetToLogin() {
-    return _setRoot(LoginPage(_viewModelFactory.login));
+    return _setRoot(LoginPage(_viewModelFactory.login()));
   }
 
   Future resetToHome() {
-    return _setRoot(HomePage(_viewModelFactory.home));
+    return _setRoot(HomePage(_viewModelFactory.home()));
   }
 
-  Future goToParkDetail() {
-    return _push(ParkDetailPage(_viewModelFactory.parkDetail));
+  Future goToParkDetail(Park park) {
+    return _push(ParkDetailPage(_viewModelFactory.parkDetail(park)));
   }
 
   void pop<T>([T data]) {

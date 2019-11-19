@@ -1,3 +1,4 @@
+import 'package:beyond/domain/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:beyond/ui/home/home_view_model.dart';
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildParkItem(Park x) {
+  Widget _buildParkItem(ParkListItem x) {
     return ListTile(
       title: Text(x.nameAndDistance),
       onTap: () => viewModel.viewPark(x),

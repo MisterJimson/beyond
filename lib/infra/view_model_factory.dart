@@ -1,3 +1,4 @@
+import 'package:beyond/domain/models.dart';
 import 'package:beyond/infra/service_locator.dart';
 import 'package:beyond/ui/home/home_view_model.dart';
 import 'package:beyond/ui/login/login_view_model.dart';
@@ -8,13 +9,13 @@ class ViewModelFactory {
 
   ViewModelFactory(this._locator);
 
-  LoginViewModel get login => LoginViewModel(_locator.authManager);
+  LoginViewModel login() => LoginViewModel(_locator.authManager);
 
-  HomeViewModel get home => HomeViewModel(
+  HomeViewModel home() => HomeViewModel(
       _locator.authManager,
       _locator.apiService,
       _locator.locationService,
       _locator.navigationManager);
 
-  ParkDetailViewModel get parkDetail => ParkDetailViewModel();
+  ParkDetailViewModel parkDetail(Park park) => ParkDetailViewModel(park);
 }

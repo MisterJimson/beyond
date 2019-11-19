@@ -49,14 +49,14 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   final _$nearbyParksAtom = Atom(name: '_HomeViewModel.nearbyParks');
 
   @override
-  List<Park> get nearbyParks {
+  List<ParkListItem> get nearbyParks {
     _$nearbyParksAtom.context.enforceReadPolicy(_$nearbyParksAtom);
     _$nearbyParksAtom.reportObserved();
     return super.nearbyParks;
   }
 
   @override
-  set nearbyParks(List<Park> value) {
+  set nearbyParks(List<ParkListItem> value) {
     _$nearbyParksAtom.context.conditionallyRunInAction(() {
       super.nearbyParks = value;
       _$nearbyParksAtom.reportChanged();

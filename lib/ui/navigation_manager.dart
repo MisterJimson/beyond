@@ -1,3 +1,4 @@
+import 'package:beyond/ui/park_detail/park_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
@@ -22,6 +23,10 @@ class NavigationManager extends NavigatorObserver {
 
   Future resetToHome() {
     return _setRoot(HomePage(_viewModelFactory.home));
+  }
+
+  Future goToParkDetail() {
+    return _push(ParkDetailPage(_viewModelFactory.parkDetail));
   }
 
   void pop<T>([T data]) {

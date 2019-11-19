@@ -1,4 +1,5 @@
 import 'package:beyond/service/location_service.dart';
+import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/manager/auth_manager.dart';
@@ -12,6 +13,7 @@ abstract class _HomeViewModel with Store {
   final AuthManager _authManager;
   final ApiService _apiService;
   final LocationService _locationService;
+  final NavigationManager _navigationManager;
 
   @observable
   String currentLocation = "";
@@ -25,12 +27,17 @@ abstract class _HomeViewModel with Store {
   @observable
   bool isNearbyParksLoading = true;
 
-  _HomeViewModel(this._authManager, this._apiService, this._locationService) {
-    getLocationData();
+  _HomeViewModel(this._authManager, this._apiService, this._locationService,
+      this._navigationManager) {
+    _getLocationData();
+  }
+
+  Future viewPark(Park park) {
+    return _navigationManager.goToParkDetail();
   }
 
   @action
-  Future getLocationData() async {
+  Future _getLocationData() async {
     var position = await _locationService.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.medium);
 

@@ -83,11 +83,11 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
         name: '${_$isNearbyParksLoadingAtom.name}_set');
   }
 
-  final _$getLocationDataAsyncAction = AsyncAction('getLocationData');
+  final _$_getLocationDataAsyncAction = AsyncAction('_getLocationData');
 
   @override
-  Future getLocationData() {
-    return _$getLocationDataAsyncAction.run(() => super.getLocationData());
+  Future _getLocationData() {
+    return _$_getLocationDataAsyncAction.run(() => super._getLocationData());
   }
 
   final _$_getCurrentLocationAsyncAction = AsyncAction('_getCurrentLocation');

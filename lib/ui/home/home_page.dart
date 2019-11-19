@@ -52,25 +52,29 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
-                if (viewModel.isNearbyParksLoading) ...[
-                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
-                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
-                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
-                  _buildLoadingShimmer(verticalPadding: 5, shimmerWidth: 200),
-                ] else
-                  ...viewModel.nearbyParks
-                      .map(
-                        (x) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Text(x.nameAndDistance),
-                        ),
-                      )
-                      .toList(),
+                if (viewModel.isNearbyParksLoading)
+                  ...List.generate(
+                      5,
+                      (_) => _buildLoadingShimmer(
+                          verticalPadding: 5, shimmerWidth: 260)),
+                if (!viewModel.isNearbyParksLoading)
+                  ...viewModel.nearbyParks.map(
+                    (x) => _buildParkItem(x),
+                  )
               ],
             );
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildParkItem(Park x) {
+    return ListTile(
+      title: Text(x.nameAndDistance),
+      onTap: () => viewModel.viewPark(x),
+      dense: true,
+      contentPadding: EdgeInsets.all(4),
     );
   }
 

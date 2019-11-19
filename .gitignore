@@ -73,4 +73,4 @@
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # Private config
-lib/config.dart
+lib/service/config/config.dart

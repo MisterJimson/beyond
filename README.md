@@ -1,5 +1,6 @@
 # Beyond
 [![Actions Status](https://github.com/MisterJimson/beyond/workflows/Test/badge.svg)](https://github.com/MisterJimson/beyond/actions)
+
 This is an example app designed to demonstrate my approach to structuring a Flutter app.
 
 I feel like most Flutter content that currently exists focuses on state management and I hope this can dig into other areas a bit more.

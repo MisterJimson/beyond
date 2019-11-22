@@ -42,6 +42,10 @@ class ApiService {
       return ApiResponse(response.statusCode, error: response.body);
     }
   }
+
+  String getStaticMapImageUrl(String longitude, String latitude) {
+    return "https://maps.locationiq.com/v2/staticmap?key=${_configService.locationIqApiKey}&size=600x600&zoom=17&markers=$latitude,$longitude|icon:large-blue-cutout;&format=png";
+  }
 }
 
 bool _isSuccessStatusCode(int code) => (code >= 200 && code < 300);

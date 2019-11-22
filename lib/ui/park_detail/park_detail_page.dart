@@ -1,6 +1,5 @@
 import 'package:beyond/ui/park_detail/park_detail_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ParkDetailPage extends StatelessWidget {
   final ParkDetailViewModel viewModel;
@@ -11,11 +10,17 @@ class ParkDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return Text(viewModel.park.name);
-        }),
+        title: Text(viewModel.parkName),
       ),
-      body: Container(),
+      body: Container(
+        child: Image.network(
+          viewModel.parkImageUrl,
+          loadingBuilder: (context, widget, chunk) {
+            if (chunk == null) return widget;
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
+      ),
     );
   }
 }

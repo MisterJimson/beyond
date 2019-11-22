@@ -17,5 +17,6 @@ class ViewModelFactory {
       _locator.locationService,
       _locator.navigationManager);
 
-  ParkDetailViewModel parkDetail(Park park) => ParkDetailViewModel(park);
+  ParkDetailViewModel parkDetail(Park park) =>
+      ParkDetailViewModel(park, _locator.apiService);
 }

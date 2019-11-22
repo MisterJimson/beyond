@@ -72,7 +72,8 @@ abstract class _HomeViewModel with Store {
     if (x.isSuccess) {
       nearbyParks = x.data
           .where((x) => x.name != null)
-          .map((x) => ParkListItem(Park(x.name, x.distance)))
+          .map((x) => ParkListItem(
+              Park(name: x.name, distance: x.distance, lat: x.lat, lon: x.lon)))
           .toList();
     }
     isNearbyParksLoading = false;

@@ -19,11 +19,11 @@ TODO
 ### Page
 A Widget that takes up the entire view of your application and can be navigated to and from. Pages contain other Widgets that are used to compose UI.
 ### ViewModel
-A class that contains all the logic and state management for a Page or other component. Provides a way to interact and react to its state. Every Page should have a ViewModel. Other UI components that aren’t Pages can also have ViewModels when needed. See more below about state management.
+A class that contains all the logic and state management for a Page or other component. Provides a way to interact with and react that state. Every Page should have a ViewModel. Other UI components that aren’t Pages can also have ViewModels when needed. See more below about state management.
 ### Service
 A class that provides a way for the app to interact with something outside of its control. Some examples are: web APIs, native device APIs, SDKs. Ideally services should hold minimal amounts of state.
 ### Manager
-A class that holds some global state and provides ways to interact and react to that state.
+A class that holds global state and provides ways to interact with and react to that state.
 ## State Management
 TODO
 ## Service Location & Dependency Injection

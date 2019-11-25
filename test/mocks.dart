@@ -19,14 +19,8 @@ class TestServiceLocator extends ServiceLocator {
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);
 
-    // Basic stubs
-    // Api
-    when(apiService.getAuthToken(any, any))
-        .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
-
-    // SharedPreferences
-    when(sharedPreferencesService.setString(any, any))
-        .thenAnswer((_) => Future.value(true));
+    setupApiStubs(apiService);
+    setupSharedPreferencesStubs(sharedPreferencesService);
   }
 }
 
@@ -36,3 +30,13 @@ class MockSharedPreferencesService extends Mock
 class MockApiService extends Mock implements ApiService {}
 
 class MockLocationService extends Mock implements LocationService {}
+
+void setupApiStubs(ApiService api) {
+  when(api.getAuthToken(any, any))
+      .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
+}
+
+void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
+  when(sharedPreferences.setString(any, any))
+      .thenAnswer((_) => Future.value(true));
+}

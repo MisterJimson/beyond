@@ -1,6 +1,4 @@
 import 'package:beyond/domain/manager/auth_manager.dart';
-import 'package:beyond/service/api_service.dart';
-import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -8,12 +6,14 @@ import '../mocks.dart';
 
 void main() {
   // Mock dependencies
-  ApiService api;
-  SharedPreferencesService sharedPreferences;
+  MockApiService api;
+  MockSharedPreferencesService sharedPreferences;
 
   // System under test
   AuthManager auth;
 
+  // Create our SUT and mocks with basic stubs
+  // Do this before every test to ensure fresh mocks
   setUp(() {
     api = MockApiService();
     sharedPreferences = MockSharedPreferencesService();
@@ -29,6 +29,8 @@ void main() {
     assert(auth.authState == null);
   });
 
+  // Other than the basic stubs, we stub for a specific test as well
+  // This stub is removed at the end of the test as we recreate mocks in setUp
   test('loadSavedLogin with saved login results in logged in AuthState',
       () async {
     // Arrange

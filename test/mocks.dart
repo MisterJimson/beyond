@@ -5,6 +5,7 @@ import 'package:beyond/service/api_service.dart';
 import 'package:beyond/service/location_service.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 
 class TestServiceLocator extends ServiceLocator {
@@ -19,8 +20,11 @@ class TestServiceLocator extends ServiceLocator {
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);
 
+    // Basic stubbing needed for many tests
+    // Can be overridden in specific tests
     setupApiStubs(apiService);
     setupSharedPreferencesStubs(sharedPreferencesService);
+    setupLocationStubs(locationService);
   }
 }
 
@@ -34,9 +38,37 @@ class MockLocationService extends Mock implements LocationService {}
 void setupApiStubs(ApiService api) {
   when(api.getAuthToken(any, any))
       .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
+  when(api.getPlace(any, any)).thenAnswer(
+    (_) => Future.value(
+      ApiResponse(
+        200,
+        data: Place(
+          lat: "42",
+          lon: "42",
+          displayName: "Place",
+          address: Address(city: "city", road: "road", houseNumber: "42"),
+        ),
+      ),
+    ),
+  );
+  when(api.getPointsOfInterest(any, any, any)).thenAnswer(
+    (_) => Future.value(
+      ApiResponse(
+        200,
+        data: [PointOfInterest(lat: "42", lon: "42", name: "POI")],
+      ),
+    ),
+  );
 }
 
 void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
   when(sharedPreferences.setString(any, any))
       .thenAnswer((_) => Future.value(true));
+}
+
+void setupLocationStubs(LocationService locationService) {
+  when(locationService.getCurrentPosition(
+          locationPermissionLevel: anyNamed("locationPermissionLevel"),
+          desiredAccuracy: anyNamed("desiredAccuracy")))
+      .thenAnswer((_) => Future.value(Position(latitude: 42, longitude: 42)));
 }

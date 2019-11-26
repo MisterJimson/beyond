@@ -55,7 +55,9 @@ void setupApiStubs(ApiService api) {
     (_) => Future.value(
       ApiResponse(
         200,
-        data: [PointOfInterest(lat: "42", lon: "42", name: "POI")],
+        data: [
+          PointOfInterest(lat: "42", lon: "42", name: "POI", distance: 10)
+        ],
       ),
     ),
   );

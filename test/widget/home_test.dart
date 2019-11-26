@@ -8,6 +8,7 @@ import '../mocks.dart';
 void main() {
   TestServiceLocator serviceLocator;
 
+  Widget homePage;
   HomeViewModel viewModel;
 
   // Create our ViewModel and mocks with basic stubs
@@ -15,9 +16,16 @@ void main() {
   setUp(() {
     serviceLocator = TestServiceLocator();
     viewModel = serviceLocator.viewModelFactory.home();
+    homePage = MaterialApp(home: HomePage(viewModel));
   });
 
-  testWidgets('test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: HomePage(viewModel)));
+  testWidgets('Display current location and nearby parks',
+      (WidgetTester tester) async {
+    // Pump page to test
+    await tester.pumpWidget(homePage);
+
+    // Verify UI
+    expect(find.text("42 road"), findsOneWidget);
+    expect(find.text("POI is 10 meters away"), findsOneWidget);
   });
 }

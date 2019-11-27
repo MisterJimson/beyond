@@ -29,10 +29,11 @@ Lets look two examples of Services in this project
 #### Example 1: ApiService
 The [ApiService](https://github.com/MisterJimson/beyond/blob/master/lib/service/api_service.dart) provides a way for our app to interact with the [LocationIQ](https://locationiq.com/) REST Api. When interacting with a REST Api there are a few things you need to do. Create Api models, serialize/deserialize JSON, handle authentication, etc. The Service should encapsulate most of that, and expose an interface that is easy to use and understand to the rest of the app.
 
-Lets take a look at that interface
+Lets look at the public interface of this Service
 ```dart
 String token;
 Future<ApiResponse<String>> getAuthToken(String username, String password);
+Future<ApiResponse<Place>> getPlace(double longitude, double latitude);
 Future<ApiResponse<List<PointOfInterest>>> getPointsOfInterest(double longitude, double latitude, String type, {int radius = 500});
 String getStaticMapImageUrl(String longitude, String latitude);
 ```

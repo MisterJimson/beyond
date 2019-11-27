@@ -68,7 +68,7 @@ Why wrap the SharedPreferences library in our own service? There are a few reaso
 
 First, to allow for better mocking and testing. Anything that interacts with things outside of your control (Services) should be mocked in most tests. For native Apis especially as there is no Android or iOS when running Flutter tests. If you try to use SharedPreferences during a test you will get `MissingPluginException`. Thats no good. 
 
-While you can use `setMockMethodCallHandler` to mock calls to the native platform, that requires you to have a pretty solid understanding of how the plugin makes native calls and what data it expects. This also can change version to version without changes to the public API of the plugin.
+While you can use `setMockMethodCallHandler` to mock calls to the native platform, that requires you to have a pretty solid understanding of how the plugin makes native calls and what data it expects. These calls can change version to version without changes to the public API of the plugin.
 
 Second, startup TODO
 

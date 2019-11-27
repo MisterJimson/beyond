@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   final ConfigService _configService;
+
+  /// This fake token for example purposes demonstrates the minimal amount of
+  /// state we should store in services
   String token;
 
   ApiService(this._configService);

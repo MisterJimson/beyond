@@ -8,6 +8,17 @@ import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 
+// This file contains our TestServiceLocator, our Mock classes
+// and some basic stubs that are useful for most tests.
+
+// By default the TestServiceLocator uses mocks for Services and
+// real implementations for Managers.
+
+// Services need to be mocked as they are fully outside of the app's control.
+
+// Our Widget tests act as integration tests, testing UI, ViewModels, and Managers.
+// When needed Managers can also be mocked for specific tests.
+
 class TestServiceLocator extends ServiceLocator {
   TestServiceLocator() : super.empty() {
     // Mocks
@@ -20,8 +31,8 @@ class TestServiceLocator extends ServiceLocator {
     viewModelFactory = ViewModelFactory(this);
     navigationManager = NavigationManager(viewModelFactory, authManager);
 
-    // Basic stubbing needed for many tests
-    // Can be overridden in specific tests
+    // Basic stubbing useful for many tests
+    // Can be overridden in specific tests as needed
     setupApiStubs(apiService);
     setupSharedPreferencesStubs(sharedPreferencesService);
     setupLocationStubs(locationService);

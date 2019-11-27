@@ -7,6 +7,8 @@ I feel like most Flutter content that currently exists focuses on state manageme
 
 I am open to feedback, suggestions, and discussions on how this approach can be improved.
 
+It's important to note that this is not meant to prescribe how everyone should write Flutter apps nor that this is the best option for every project.
+
 ### Goals
 - Simple
 - Clean
@@ -25,6 +27,25 @@ A class that provides a way for the app to interact with something outside of it
 ### Manager
 A class that holds global state and provides ways to interact with and react to that state.
 ## State Management
+There are many articles and discussions on state management for Flutter so I will only touch on this briefly.
+
+Lets define what state management is when it comes to writing a Flutter app.
+
+State management is...
+- How the app interacts with data
+- How the app reacts to changes in data
+- How the app organizes code related to doing the above
+
+If you look at the above statements and compare them to using `StatefulWidgets` and `setState` you will come to a few limitations when working on a large app.
+- App state and UI are tied closely together 
+- Ties rebuilding UI to the same scope as your state
+- Makes it hard to separate UI code from "business logic"
+
+The above can be challenging when building a large application. There are a few alternative approaches built into Flutter and many third party libraries that each have different ways of solving for this.
+
+MobX is the library used for state management here and the below section will expand on why.
+### Why MobX?
+There are a few primary reasons why MobX is the preferred choice for state management.
 TODO
 ## Service Location & Dependency Injection
 TODO

@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks.dart';
 
+// These tests focus on the HomePage and the HomeViewModel
+
 void main() {
   TestServiceLocator serviceLocator;
 
@@ -12,7 +14,7 @@ void main() {
   HomeViewModel viewModel;
 
   // Create our ViewModel and mocks with basic stubs
-  // Do this before every test to ensure fresh mocks
+  // Do this before every test to ensure fresh mocks and page/viewmodel
   setUp(() {
     serviceLocator = TestServiceLocator();
     viewModel = serviceLocator.viewModelFactory.home();

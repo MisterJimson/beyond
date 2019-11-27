@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 
 import '../mocks.dart';
 
+// These unit tests only test the AuthManager.
+
 void main() {
   // Mock dependencies
   MockApiService api;
@@ -13,7 +15,7 @@ void main() {
   AuthManager auth;
 
   // Create our SUT and mocks with basic stubs
-  // Do this before every test to ensure fresh mocks
+  // Do this before every test to ensure fresh mocks and SUT
   setUp(() {
     api = MockApiService();
     sharedPreferences = MockSharedPreferencesService();

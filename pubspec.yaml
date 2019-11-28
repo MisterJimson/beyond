@@ -7,10 +7,10 @@ environment:
   sdk: ">=2.5.0 <3.0.0"
 
 dependencies:
-  mobx: ^0.3.9+1
-  flutter_mobx: ^0.3.3+1
+  mobx: ^0.3.9+3
+  flutter_mobx: ^0.3.3+3
   flutter_svg: ^0.15.0
-  shared_preferences: ^0.5.4+3
+  shared_preferences: ^0.5.4+6
   geolocator: ^5.1.5
   shimmer: ^1.0.1
   flutter:

@@ -3,6 +3,7 @@ import 'package:beyond/infra/view_model_factory.dart';
 import 'package:beyond/service/api_service.dart';
 import 'package:beyond/service/config/config_service.dart';
 import 'package:beyond/service/location_service.dart';
+import 'package:beyond/service/package_info_service.dart';
 import 'package:beyond/service/service_common.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
@@ -13,6 +14,7 @@ class ServiceLocator implements Startable {
   ApiService apiService;
   SharedPreferencesService sharedPreferencesService;
   LocationService locationService;
+  PackageInfoService packageInfoService;
 
   /// UI
   NavigationManager navigationManager;
@@ -26,7 +28,8 @@ class ServiceLocator implements Startable {
   /// Creates a new container for our services and instantiates them
   ServiceLocator() {
     configService = ConfigService();
-    apiService = ApiService(configService);
+    packageInfoService = PackageInfoService();
+    apiService = ApiService(configService, packageInfoService);
     sharedPreferencesService = SharedPreferencesService();
     locationService = LocationService();
     authManager = AuthManager(apiService, sharedPreferencesService);
@@ -41,6 +44,8 @@ class ServiceLocator implements Startable {
   @override
   Future start() async {
     // Order can be important here if the services depend on each other
-    return sharedPreferencesService.start();
+    return sharedPreferencesService
+        .start()
+        .then((_) => packageInfoService.start());
   }
 }

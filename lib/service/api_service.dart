@@ -1,16 +1,18 @@
 import 'dart:convert';
 
 import 'package:beyond/service/config/config_service.dart';
+import 'package:beyond/service/package_info_service.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   final ConfigService _configService;
+  final PackageInfoService _packageInfoService;
 
   /// This fake token for example purposes demonstrates the minimal amount of
   /// state we should store in services
   String token;
 
-  ApiService(this._configService);
+  ApiService(this._configService, this._packageInfoService);
 
   /// This performs a fake login for demo purposes
   Future<ApiResponse<String>> getAuthToken(String username, String password) {
@@ -20,7 +22,9 @@ class ApiService {
 
   Future<ApiResponse<Place>> getPlace(double longitude, double latitude) async {
     var response = await http.get(
-        "https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json");
+      "https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json",
+      headers: getHeaders(),
+    );
 
     if (_isSuccessStatusCode(response.statusCode)) {
       return ApiResponse(response.statusCode,
@@ -34,7 +38,9 @@ class ApiService {
       double longitude, double latitude, String type,
       {int radius = 500}) async {
     var response = await http.get(
-        "https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json");
+      "https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json",
+      headers: getHeaders(),
+    );
 
     if (_isSuccessStatusCode(response.statusCode)) {
       Iterable list = json.decode(response.body);
@@ -48,6 +54,15 @@ class ApiService {
 
   String getStaticMapImageUrl(String longitude, String latitude) {
     return "https://maps.locationiq.com/v2/staticmap?key=${_configService.locationIqApiKey}&size=600x600&zoom=17&markers=$latitude,$longitude|icon:large-blue-cutout;&format=png";
+  }
+
+  /// It is common practice to send some app information as headers on API requests
+  /// This can help you analyze usage in the field
+  Map<String, String> getHeaders() {
+    return {
+      "Version": _packageInfoService.version,
+      "BuildNumber": _packageInfoService.buildNumber,
+    };
   }
 }
 

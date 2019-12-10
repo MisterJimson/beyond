@@ -95,7 +95,33 @@ MobX is the library used for state management here and the below section will ex
 There are a few primary reasons why MobX is the preferred choice for state management.
 TODO
 ## Service Location & Dependency Injection
-TODO
+For SL and DI we keep it simple. We have a [ServiceLocator](https://github.com/MisterJimson/beyond/blob/master/lib/infra/service_locator.dart) that contains all our singletons and prepares them for use by the rest of the app. 
+
+We also have a [ViewModelFactory](https://github.com/MisterJimson/beyond/blob/master/lib/infra/view_model_factory.dart) that is used to create instances of ViewModels and pass in parameters.
+
+These 2 classes allow all our app's components to request what they need by constructor injection.
+
+#### SL & DI Example 1: AuthManager
+To understand what a class in our app depends on, just look at the final fields and constructor.
+```dart
+final ApiService _api;
+final SharedPreferencesService _sharedPreferencesService;
+
+AuthManager(this._api, this._sharedPreferencesService);
+```
+Here you can see the AuthManager requires the ApiService and the SharedPreferencesService. Easy. To provide these, just pass them in when the app starts up in our ServiceLocator.
+```dart
+AuthManager authManager;
+
+ServiceLocator() {
+  configService = ConfigService();
+  packageInfoService = PackageInfoService();
+  apiService = ApiService(configService, packageInfoService);
+  sharedPreferencesService = SharedPreferencesService();
+  authManager = AuthManager(apiService, sharedPreferencesService);
+}
+```
+If you ever need the AuthManager to use another class, just pass it in and add it as another final field in the AuthManager.
 ## Testing
 TODO
 ## Configuration

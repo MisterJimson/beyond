@@ -9,12 +9,16 @@ I am open to feedback, suggestions, and discussions on how this approach can be 
 
 It's important to note that this is not meant to prescribe how everyone should write Flutter apps nor that this is the best option for every project.
 
-### Goals
+## Goals
 - Simple
 - Clean
 - Testable
 - Consistent
 - Don't reinvent the wheel, use libraries when appropriate
+
+## Setup
+1. Get a free API key from https://locationiq.com/
+2. Open `lib/service/config/config.dart` and enter your API key
 
 ## Architecture & Naming Conventions
 TODO

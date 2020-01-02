@@ -12,7 +12,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
   - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
@@ -21,7 +21,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   geolocator:
     :path: ".symlinks/plugins/geolocator/ios"
   google_api_availability:
@@ -41,6 +41,6 @@ SPEC CHECKSUMS:
   package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
 
-PODFILE CHECKSUM: b6a0a141693093b304368d08511b46cf3d1d0ac5
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
 COCOAPODS: 1.8.4

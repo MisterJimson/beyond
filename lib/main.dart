@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mvvm Plus',
+      title: 'Beyond',
       navigatorKey: _serviceLocator.navigationManager.navigatorKey,
       theme: ThemeData(
           primarySwatch: Colors.blue,

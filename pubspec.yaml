@@ -7,13 +7,13 @@ environment:
   sdk: ">=2.5.0 <3.0.0"
 
 dependencies:
-  mobx: ^0.3.9+3
-  flutter_mobx: ^0.3.3+3
+  mobx: ^0.4.0+1
+  flutter_mobx: ^0.3.6
   flutter_svg: ^0.15.0
-  shared_preferences: ^0.5.4+8
+  shared_preferences: ^0.5.6
   geolocator: ^5.1.5
   shimmer: ^1.0.1
-  package_info: ^0.4.0+12
+  package_info: ^0.4.0+13
   flutter:
     sdk: flutter
 
@@ -21,8 +21,8 @@ dependencies:
 
 dev_dependencies:
   pedantic: ^1.8.0+1
-  mobx_codegen: ^0.3.10
-  build_runner: ^1.7.1
+  mobx_codegen: ^0.3.12+1
+  build_runner: ^1.7.2
   mockito: ^4.1.1
   flutter_test:
     sdk: flutter

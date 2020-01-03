@@ -8,26 +8,21 @@ Most Flutter content that currently exists focuses on state management and I hop
 I am open to feedback, suggestions, and discussions on how this approach can be improved.
 
 It's important to note that this is not meant to prescribe how everyone should write Flutter apps nor that this is the best option for every project.
-
 ## Goals
 - Simple
 - Clean
 - Testable
 - Consistent
 - Don't reinvent the wheel, use libraries when appropriate
-
 ## Setup
 1. Get a free API key from https://locationiq.com/
 2. Open `lib/service/config/config.dart` and enter your API key
-
-
-
 ## Architecture Overview
 The rest of this document describes how this app is structured
 ### Page
 A Widget that takes up the entire view of your application and can be navigated to and from. Pages contain other Widgets that are used to compose UI.
 ### ViewModel
-A class that contains all the logic and local state for a Page or other component. Provides a way to interact with and react to that state. Every Page should have a ViewModel. Other UI components that are not Pages can also have ViewModels when needed. See more below about state management.
+A class that contains all the logic and local state for a Page or other component. Provides a way to interact with and react to that state. Every Page should have a ViewModel. Other UI components that are not Pages can also have ViewModels when needed. Powered by MobX. See more below about state management.
 ### Service
 A class that provides a way for the app to interact with something outside of its control. Examples are: web APIs, native device APIs, SDKs, and databases. Ideally services should hold minimal amounts of state.
 
@@ -132,6 +127,14 @@ ServiceLocator() {
 ```
 If you ever need the AuthManager to use another class, just pass it in and add it as another final field in the AuthManager.
 ## Testing
+Testing is very important in any app designed to scale. The below sections go into detail about the different types of testing I recommend for this approach.
+### Unit Testing: Managers
+TODO
+### UI Integration Testing: Pages, Widgets, ViewModels
+TODO
+### Integration Testing: Services
+TODO
+### End To End Testing
 TODO
 ## Configuration
 TODO

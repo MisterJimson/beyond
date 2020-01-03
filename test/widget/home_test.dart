@@ -77,7 +77,7 @@ void main() {
     // Assert: Verify UI
     expect(find.byType(Shimmer), findsNWidgets(6));
 
-    // Cleanup: Timers
+    // Cleanup: Timers (the delayed futures)
     await tester.pumpAndSettle();
   });
 }

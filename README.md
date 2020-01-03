@@ -79,6 +79,8 @@ While you can use `setMockMethodCallHandler` to mock calls to the native platfor
 Second, startup control. Some Services will require some asynchronous work before they are ready to be used. You can see that in the `SharedPreferencesService` above and also in the [PackageInfoService](https://github.com/MisterJimson/beyond/blob/master/lib/service/package_info_service.dart). Creating our own classes allows us to standardize the startup of all these Services with a common interface (`Startable`) and lets us know for sure when the Service is ready to be used by the rest of the app.
 ### Manager
 A class that holds global state and provides ways to interact with and react to that state.
+
+TODO
 ## State Management
 There are many articles and discussions on state management for Flutter so I will only touch on this briefly.
 
@@ -99,6 +101,7 @@ The above can be challenging when building a large application. There are a few 
 MobX is the library used for state management here and the below section will expand on why.
 ### Why MobX?
 There are a few primary reasons why MobX is the preferred choice for state management.
+
 TODO
 ## Service Location & Dependency Injection
 For SL and DI we keep it simple. We have a [ServiceLocator](https://github.com/MisterJimson/beyond/blob/master/lib/infra/service_locator.dart) that contains all our singletons and prepares them for use by the rest of the app. 

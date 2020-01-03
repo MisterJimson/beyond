@@ -17,16 +17,22 @@ void main() {
   // Do this before every test to ensure fresh mocks and page/viewmodel
   setUp(() {
     serviceLocator = TestServiceLocator();
+  });
+
+  void createSystemUnderTest() {
     viewModel = serviceLocator.viewModelFactory.home();
     homePage = MaterialApp(home: HomePage(viewModel));
-  });
+  }
 
   testWidgets('Display current location and nearby parks',
       (WidgetTester tester) async {
-    // Pump page to test
+    // Arrange
+    createSystemUnderTest();
+
+    // Act: Pump page to test
     await tester.pumpWidget(homePage);
 
-    // Verify UI
+    // Assert: Verify UI
     expect(find.text("42 road"), findsOneWidget);
     expect(find.text("POI is 10 meters away"), findsOneWidget);
   });

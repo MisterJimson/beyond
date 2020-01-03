@@ -14,19 +14,24 @@ void main() {
   // System under test
   AuthManager auth;
 
-  // Create our SUT and mocks with basic stubs
-  // Do this before every test to ensure fresh mocks and SUT
+  // Create our mocks with basic stubs
+  // Do this before every test to ensure fresh mocks
   setUp(() {
     api = MockApiService();
     sharedPreferences = MockSharedPreferencesService();
 
     setupApiStubs(api);
     setupSharedPreferencesStubs(sharedPreferences);
-
-    auth = AuthManager(api, sharedPreferences);
   });
 
+  void createSystemUnderTest() {
+    auth = AuthManager(api, sharedPreferences);
+  }
+
   test('AuthState starts null', () async {
+    // Arrange
+    createSystemUnderTest();
+
     // Assert
     assert(auth.authState == null);
   });
@@ -36,6 +41,7 @@ void main() {
   test('loadSavedLogin with saved login results in logged in AuthState',
       () async {
     // Arrange
+    createSystemUnderTest();
     when(sharedPreferences.getString("loginToken")).thenReturn("token");
 
     // Act
@@ -49,6 +55,9 @@ void main() {
 
   test('loadSavedLogin with no saved login results in logged out AuthState',
       () async {
+    // Arrange
+    createSystemUnderTest();
+
     // Act
     auth.loadSavedLogin();
 

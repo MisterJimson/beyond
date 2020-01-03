@@ -163,8 +163,69 @@ class ViewModelFactory {
 ```
 ## Testing
 Testing is very important in any app designed to scale. The below sections go into detail about the different types of testing I recommend for this approach.
-### Unit Testing: Managers
+### Testing Setup
 TODO
+### Unit Testing: Managers
+Unit testing is best suited to code you completely control and the more valuable code should be tested first. For this approach, Managers should be the priority to test.
+
+Here is an example of our AuthManager tests that demonstrate how we use our mocks and validate behavior.
+
+These tests are written as AAA (Arrange, Act, Assert), but feel free to structure the actual tests however you prefer.
+```dart
+void main() {
+  // Mock dependencies
+  MockApiService api;
+  MockSharedPreferencesService sharedPreferences;
+
+  // System under test
+  AuthManager auth;
+
+  // Create our mocks with basic stubs
+  // Do this before every test to ensure fresh mocks
+  setUp(() {
+    api = MockApiService();
+    sharedPreferences = MockSharedPreferencesService();
+
+    setupApiStubs(api);
+    setupSharedPreferencesStubs(sharedPreferences);
+  });
+
+  void createSystemUnderTest() {
+    auth = AuthManager(api, sharedPreferences);
+  }
+
+  test('loadSavedLogin with no saved login results in logged out AuthState',
+      () async {
+    // Arrange
+    createSystemUnderTest();
+
+    // Act
+    auth.loadSavedLogin();
+
+    // Assert
+    assert(auth.authState != null);
+    assert(!auth.authState.isLoggedIn);
+    assert(auth.authState.token == null);
+  });
+
+  // Other than the basic stubs, we can stub for a specific test as well
+  // This stub is removed at the end of the test as we recreate mocks in setUp
+  test('loadSavedLogin with saved login results in logged in AuthState',
+      () async {
+    // Arrange
+    createSystemUnderTest();
+    when(sharedPreferences.getString("loginToken")).thenReturn("token");
+
+    // Act
+    auth.loadSavedLogin();
+
+    // Assert
+    assert(auth.authState != null);
+    assert(auth.authState.isLoggedIn);
+    assert(auth.authState.token == "token");
+  });
+}
+```
 ### UI Integration Testing: Pages, Widgets, ViewModels
 TODO
 ### Integration Testing: Services

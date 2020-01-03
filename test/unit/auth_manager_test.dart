@@ -36,7 +36,21 @@ void main() {
     assert(auth.authState == null);
   });
 
-  // Other than the basic stubs, we stub for a specific test as well
+  test('loadSavedLogin with no saved login results in logged out AuthState',
+      () async {
+    // Arrange
+    createSystemUnderTest();
+
+    // Act
+    auth.loadSavedLogin();
+
+    // Assert
+    assert(auth.authState != null);
+    assert(!auth.authState.isLoggedIn);
+    assert(auth.authState.token == null);
+  });
+
+  // Other than the basic stubs, we can stub for a specific test as well
   // This stub is removed at the end of the test as we recreate mocks in setUp
   test('loadSavedLogin with saved login results in logged in AuthState',
       () async {
@@ -51,19 +65,5 @@ void main() {
     assert(auth.authState != null);
     assert(auth.authState.isLoggedIn);
     assert(auth.authState.token == "token");
-  });
-
-  test('loadSavedLogin with no saved login results in logged out AuthState',
-      () async {
-    // Arrange
-    createSystemUnderTest();
-
-    // Act
-    auth.loadSavedLogin();
-
-    // Assert
-    assert(auth.authState != null);
-    assert(!auth.authState.isLoggedIn);
-    assert(auth.authState.token == null);
   });
 }

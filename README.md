@@ -164,11 +164,61 @@ class ViewModelFactory {
 ## Testing
 Testing is very important in any app designed to scale. The below sections go into detail about the different types of testing I recommend for this approach.
 ### Testing Setup
+Before writing tests we setup mocks, stubs and configure our ServiceLocator for testing. [Mockito](https://github.com/dart-lang/mockito) is used for mocking, stubbing and validating interactions with mocks.
+#### Mocks & Basic Stubs
+Create mock classes for each class you plan to mock. This should mainly be Services. 
+
+Mocking services is very important since things outside of your control can alter the results of your tests despite code not changing. The large majority of tests should only test the code in your project, not Web APIs or native device APIs.
+
+By default mocks will let you call any function or access any field, always retuning null. Setup some basic stubs that allow simple tests to run without having to specify common behavior in every test.
+
+You can start small, only stubbing what you need to, and expand over time.
+```dart
+class MockSharedPreferencesService extends Mock implements SharedPreferencesService {}
+
+class MockApiService extends Mock implements ApiService {}
+
+void setupApiStubs(ApiService api) {
+  when(api.getAuthToken(any, any))
+      .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
+  when(api.getPlace(any, any)).thenAnswer(
+    (_) => Future.value(
+      ApiResponse(
+        200,
+        data: Place(
+          lat: "42",
+          lon: "42",
+          displayName: "Place",
+          address: Address(city: "city", road: "road", houseNumber: "42"),
+        ),
+      ),
+    ),
+  );
+  when(api.getPointsOfInterest(any, any, any)).thenAnswer(
+    (_) => Future.value(
+      ApiResponse(
+        200,
+        data: [
+          PointOfInterest(lat: "42", lon: "42", name: "POI", distance: 10)
+        ],
+      ),
+    ),
+  );
+}
+
+void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
+  when(sharedPreferences.setString(any, any))
+      .thenAnswer((_) => Future.value(true));
+}
+```
+#### TestServiceLocator
 TODO
 ### Unit Testing: Managers
 Unit testing is best suited to code you completely control and the more valuable code should be tested first. For this approach, Managers should be the priority to test.
 
 Here is an example of our AuthManager tests that demonstrate how we use our mocks and validate behavior.
+
+Take note of resetting the mocks per test and overriding the basic stubs with test specific stubs.
 
 These tests are written as AAA (Arrange, Act, Assert), but feel free to structure the actual tests however you prefer.
 ```dart

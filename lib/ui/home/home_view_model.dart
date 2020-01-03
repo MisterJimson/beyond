@@ -5,6 +5,7 @@ import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/service/api_service.dart';
+import 'package:pedantic/pedantic.dart';
 
 part 'home_view_model.g.dart';
 
@@ -45,8 +46,8 @@ abstract class _HomeViewModel with Store {
     if (position != null &&
         position.latitude != null &&
         position.longitude != null) {
-      _getCurrentLocation(position);
-      _getNearbyParks(position);
+      unawaited(_getCurrentLocation(position));
+      unawaited(_getNearbyParks(position));
     } else {
       isCurrentLocationLoading = false;
       isNearbyParksLoading = false;

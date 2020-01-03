@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
         return RaisedButton(
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed:
-              viewModel.isLoginButtonEnabled ? () => viewModel.login() : null,
+              viewModel.isLoginButtonEnabled ? viewModel.login : null,
           color: Colors.blue,
           textColor: Colors.white,
           shape: RoundedRectangleBorder(

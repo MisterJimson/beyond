@@ -126,6 +126,41 @@ ServiceLocator() {
 }
 ```
 If you ever need the AuthManager to use another class, just pass it in and add it as another final field in the AuthManager.
+#### SL & DI Example 2: ViewModels
+ViewModels are created on demand when the Widgets that require them are created. Same as the AuthManager above, looking at the constructor tells you what is required to create it.
+
+ViewModels can also have parameters that are not from our ServiceLocator. Below is our ParkDetailViewModel that requires a Park object to be passed in as well.
+```dart
+class ParkDetailViewModel {
+  final ApiService _apiService;
+  final Park _park;
+
+  String get parkName => _park.name;
+
+  String get distanceFrom => "You are ${_park.distance} meters away";
+
+  ParkDetailViewModel(this._park, this._apiService);
+}
+```
+As mentioned before, our [ViewModelFactory](https://github.com/MisterJimson/beyond/blob/master/lib/infra/view_model_factory.dart) is responsible for creating these ViewModels. Add to it as you build out your app.
+```dart
+class ViewModelFactory {
+  final ServiceLocator _locator;
+
+  ViewModelFactory(this._locator);
+
+  LoginViewModel login() => LoginViewModel(_locator.authManager);
+
+  HomeViewModel home() => HomeViewModel(
+      _locator.authManager,
+      _locator.apiService,
+      _locator.locationService,
+      _locator.navigationManager);
+
+  ParkDetailViewModel parkDetail(Park park) =>
+      ParkDetailViewModel(park, _locator.apiService);
+}
+```
 ## Testing
 Testing is very important in any app designed to scale. The below sections go into detail about the different types of testing I recommend for this approach.
 ### Unit Testing: Managers

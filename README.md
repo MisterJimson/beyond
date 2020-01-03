@@ -1,9 +1,9 @@
 # Beyond
 [![Actions Status](https://github.com/MisterJimson/beyond/workflows/Test/badge.svg)](https://github.com/MisterJimson/beyond/actions)
 
-This is an example app designed to demonstrate my approach to structuring a Flutter app.
+An example app that demonstrates an approach to scalable Flutter app development
 
-I feel like most Flutter content that currently exists focuses on state management and I hope this can dig into other areas a bit more. _Beyond just state management_
+Most Flutter content that currently exists focuses on state management and I hope this can dig into other areas a bit more. _Beyond just state management_
 
 I am open to feedback, suggestions, and discussions on how this approach can be improved.
 
@@ -20,14 +20,16 @@ It's important to note that this is not meant to prescribe how everyone should w
 1. Get a free API key from https://locationiq.com/
 2. Open `lib/service/config/config.dart` and enter your API key
 
-## Architecture & Naming Conventions
-TODO
+
+
+## Architecture Overview
+The rest of this document describes how this app is structured
 ### Page
 A Widget that takes up the entire view of your application and can be navigated to and from. Pages contain other Widgets that are used to compose UI.
 ### ViewModel
 A class that contains all the logic and local state for a Page or other component. Provides a way to interact with and react to that state. Every Page should have a ViewModel. Other UI components that are not Pages can also have ViewModels when needed. See more below about state management.
 ### Service
-A class that provides a way for the app to interact with something outside of its control. Some examples are: web APIs, native device APIs, SDKs, and databases. Ideally services should hold minimal amounts of state.
+A class that provides a way for the app to interact with something outside of its control. Examples are: web APIs, native device APIs, SDKs, and databases. Ideally services should hold minimal amounts of state.
 
 Lets look two examples of Services in this project
 #### Service Example 1: ApiService

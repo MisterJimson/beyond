@@ -283,7 +283,7 @@ TODO
 ### End To End Testing
 TODO
 ## Code Style
-TODO
+Other than the structure mentioned in this document, [Pedantic](https://github.com/dart-lang/pedantic) is a library that help enforces best practices for Dart code.
 ## Configuration
 TODO
 # Dependencies

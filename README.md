@@ -8,26 +8,26 @@ Most Flutter content that currently exists focuses on state management and I hop
 I am open to feedback, suggestions, and discussions on how this approach can be improved.
 
 It's important to note that this is not meant to prescribe how everyone should write Flutter apps nor that this is the best option for every project.
-## Goals
+# Goals
 - Simple
 - Clean
 - Testable
 - Consistent
 - Don't reinvent the wheel, use libraries when appropriate
-## Setup
+# Setup
 1. Get a free API key from https://locationiq.com/
 2. Open `lib/service/config/config.dart` and enter your API key
 ## Architecture Overview
 The rest of this document describes how this app is structured
-### Page
+## Page
 A Widget that takes up the entire view of your application and can be navigated to and from. Pages contain other Widgets that are used to compose UI.
-### ViewModel
+## ViewModel
 A class that contains all the logic and local state for a Page or other component. Provides a way to interact with and react to that state. Every Page should have a ViewModel. Other UI components that are not Pages can also have ViewModels when needed. Powered by MobX. See more below about state management.
-### Service
+## Service
 A class that provides a way for the app to interact with something outside of its control. Examples are: web APIs, native device APIs, SDKs, and databases. Ideally services should hold minimal amounts of state.
 
 Lets look two examples of Services in this project
-#### Service Example 1: ApiService
+### Service Example 1: ApiService
 The [ApiService](https://github.com/MisterJimson/beyond/blob/master/lib/service/api_service.dart) provides a way for our app to interact with the [LocationIQ](https://locationiq.com/) REST Api. When interacting with a REST Api there are a few things you need to do. Create Api models, serialize/deserialize JSON, handle authentication, etc. The Service should encapsulate most of that, and expose an interface that is easy to use and understand to the rest of the app.
 
 Lets look at the public interface of this Service
@@ -41,7 +41,7 @@ String getStaticMapImageUrl(String longitude, String latitude);
 From the above its clear how to use this Service and its easy to know what data you get back. Anyone working on your app won't need to know the implementation details of the Service. 
 
 Another reason we abstract the API with a Service is for mocking during tests. It's very simple to use a mock that returns anything you want from the above methods and properties. This will be expanded on below in Testing.
-#### Service Example 2: SharedPreferencesService
+### Service Example 2: SharedPreferencesService
 The [SharedPreferencesService](https://github.com/MisterJimson/beyond/blob/master/lib/service/shared_preferences_service.dart) provides a way to for our app to interact with the native SharedPreferences/NSUserDefaults APIs on Android and iOS.
 
 You may be thinking "Wait, isn't there an official package for this?" and you would be right. We are using that package here and we are not redeveloping its functionality.
@@ -72,7 +72,7 @@ First, to allow for better mocking and testing. Anything that interacts with thi
 While you can use `setMockMethodCallHandler` to mock calls to the native platform, that requires you to have a pretty solid understanding of how the plugin makes native calls and what data it expects. These calls can change version to version without changes to the public API of the plugin.
 
 Second, startup control. Some Services will require some asynchronous work before they are ready to be used. You can see that in the `SharedPreferencesService` above and also in the [PackageInfoService](https://github.com/MisterJimson/beyond/blob/master/lib/service/package_info_service.dart). Creating our own classes allows us to standardize the startup of all these Services with a common interface (`Startable`) and lets us know for sure when the Service is ready to be used by the rest of the app.
-### Manager
+## Manager
 A class that holds global state and provides ways to interact with and react to that state.
 
 TODO
@@ -105,7 +105,7 @@ We also have a [ViewModelFactory](https://github.com/MisterJimson/beyond/blob/ma
 
 These 2 classes allow all our app's components to request what they need by constructor injection.
 
-#### SL & DI Example 1: AuthManager
+### SL & DI Example 1: AuthManager
 To understand what a class in our app depends on, just look at the final fields and constructor.
 ```dart
 final ApiService _api;
@@ -126,7 +126,7 @@ ServiceLocator() {
 }
 ```
 If you ever need the AuthManager to use another class, just pass it in and add it as another final field in the AuthManager.
-#### SL & DI Example 2: ViewModels
+### SL & DI Example 2: ViewModels
 ViewModels are created on demand when the Widgets that require them are created. Same as the AuthManager above, looking at the constructor tells you what is required to create it.
 
 ViewModels can also have parameters that are not from our ServiceLocator. Below is our ParkDetailViewModel that requires a Park object to be passed in as well.
@@ -282,5 +282,12 @@ TODO
 TODO
 ### End To End Testing
 TODO
+## Code Style
+TODO
 ## Configuration
 TODO
+# Dependencies
+These are the libraries used for this approach to Flutter development. There are other libraries used in the example app, but these are the ones specific to this approach.
+ * [Mobx](https://github.com/mobxjs/mobx.dart)
+ * [Pedantic](https://github.com/dart-lang/pedantic)
+ * [Mockito](https://github.com/dart-lang/mockito)

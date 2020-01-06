@@ -161,6 +161,7 @@ class ViewModelFactory {
       ParkDetailViewModel(park, _locator.apiService);
 }
 ```
+You can see above that the HomeViewModel and LoginViewModel don't need any extra arguments, while ParkDetailViewModel needs the Park passed in.
 ## Testing
 Testing is very important in any app designed to scale. The below sections go into detail about the different types of testing I recommend for this approach.
 ### Testing Setup
@@ -277,6 +278,9 @@ void main() {
 }
 ```
 ### UI Integration Testing: Pages, Widgets, ViewModels
+#### Pages & ViewModels
+TODO
+#### Widgets
 TODO
 ### Integration Testing: Services
 TODO

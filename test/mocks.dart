@@ -2,7 +2,9 @@ import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:beyond/infra/service_locator.dart';
 import 'package:beyond/infra/view_model_factory.dart';
 import 'package:beyond/service/api_service.dart';
+import 'package:beyond/service/config/config_service.dart';
 import 'package:beyond/service/location_service.dart';
+import 'package:beyond/service/package_info_service.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
@@ -45,6 +47,10 @@ class MockSharedPreferencesService extends Mock
 class MockApiService extends Mock implements ApiService {}
 
 class MockLocationService extends Mock implements LocationService {}
+
+class MockConfigService extends Mock implements ConfigService {}
+
+class MockPackageInfoService extends Mock implements PackageInfoService {}
 
 void setupApiStubs(ApiService api) {
   when(api.getAuthToken(any, any))

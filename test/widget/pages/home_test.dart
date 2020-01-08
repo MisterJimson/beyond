@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../mocks.dart';
+import '../../mocks.dart';
 
 // These tests focus on the HomePage and the HomeViewModel
 

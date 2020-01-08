@@ -37,5 +37,5 @@ void main() {
     assert(result.isSuccess);
     assert(result.data != null);
     assert(result.data.address.road == 'Yonge St');
-  });
+  }, skip: true);
 }

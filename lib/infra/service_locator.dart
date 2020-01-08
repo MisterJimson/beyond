@@ -7,6 +7,7 @@ import 'package:beyond/service/package_info_service.dart';
 import 'package:beyond/service/service_common.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
+import 'package:flutter/foundation.dart';
 
 class ServiceLocator implements Startable {
   /// Services
@@ -37,7 +38,7 @@ class ServiceLocator implements Startable {
     navigationManager = NavigationManager(viewModelFactory, authManager);
   }
 
-  /// For testing
+  @visibleForTesting
   ServiceLocator.empty();
 
   /// Runs any required startup code for all our services

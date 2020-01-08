@@ -213,7 +213,32 @@ void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
 }
 ```
 #### TestServiceLocator
-TODO
+When integration or end to end testing it's handy to have your service locator setup with mocks. This lets you access components like ViewModels just as you do in your application, and takes care of passing around mock and real dependencies.
+
+Here you can see us setting up our ServiceLocator with mocks for our Services and real implementations for our other components.
+
+We also setup some basic stubs that can be used in most tests, as noted before.
+```dart
+class TestServiceLocator extends ServiceLocator {
+  TestServiceLocator() : super.empty() {
+    // Mocks
+    sharedPreferencesService = MockSharedPreferencesService();
+    apiService = MockApiService();
+    locationService = MockLocationService();
+
+    // Real
+    authManager = AuthManager(apiService, sharedPreferencesService);
+    viewModelFactory = ViewModelFactory(this);
+    navigationManager = NavigationManager(viewModelFactory, authManager);
+
+    // Basic stubbing useful for many tests
+    // Can be overridden in specific tests as needed
+    setupApiStubs(apiService);
+    setupSharedPreferencesStubs(sharedPreferencesService);
+    setupLocationStubs(locationService);
+  }
+}
+```
 ### Unit Testing: Managers
 Unit testing is best suited to code you completely control and the more valuable code should be tested first. For this approach, Managers should be the priority to test.
 

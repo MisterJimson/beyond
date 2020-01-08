@@ -314,9 +314,16 @@ TODO
 ## Code Style
 Other than the structure mentioned in this document, [Pedantic](https://github.com/dart-lang/pedantic) is a library that help enforces best practices for Dart code.
 ## Configuration
-TODO
+TODO: Implement this section in example app
+
+When building client side applications its important to be able to support them remotely. After a user installs an app there is basically no way to force them to update. I always suggest adding a way to remotely configure your app without pushing an update.
+
+You should be able to do the following without releasing an client side update.
+* Change URLs for Web APIs
+* Change API keys
+* Enforce a minimum supported version
 # Dependencies
-These are the libraries used for this approach to Flutter development. There are other libraries used in the example app, but these are the ones specific to this approach.
+These are the libraries used for this approach to Flutter development. There are other libraries used in the example app, but these are the ones that are important and recommended for this approach.
  * [Mobx](https://github.com/mobxjs/mobx.dart)
  * [Pedantic](https://github.com/dart-lang/pedantic)
  * [Mockito](https://github.com/dart-lang/mockito)

@@ -11,7 +11,7 @@ dependencies:
   flutter_mobx: ^0.3.6
   flutter_svg: ^0.15.0
   shared_preferences: ^0.5.6
-  geolocator: ^5.1.5
+  geolocator: ^5.2.0
   shimmer: ^1.0.1
   package_info: ^0.4.0+13
   pedantic: ^1.8.0+1

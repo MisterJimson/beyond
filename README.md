@@ -8,17 +8,18 @@ Most Flutter content that currently exists focuses on state management and I hop
 I am open to feedback, suggestions, and discussions on how this approach can be improved.
 
 It's important to note that this is not meant to prescribe how everyone should write Flutter apps nor that this is the best option for every project.
-# Goals
+
+## Example App Setup
+1. Get a free API key from https://locationiq.com/
+2. Open `lib/service/config/config.dart` and enter your API key
+# Architecture Overview
+The rest of this document describes how apps that use this approach are structured and why.
+## Goals
 - Simple
 - Clean
 - Testable
 - Consistent
 - Don't reinvent the wheel, use libraries when appropriate
-# Setup
-1. Get a free API key from https://locationiq.com/
-2. Open `lib/service/config/config.dart` and enter your API key
-## Architecture Overview
-The rest of this document describes how this app is structured
 ## Page
 A Widget that takes up the entire view of your application and can be navigated to and from. Pages contain other Widgets that are used to compose UI.
 ## ViewModel

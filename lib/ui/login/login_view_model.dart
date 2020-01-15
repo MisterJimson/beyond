@@ -1,11 +1,12 @@
 import 'package:beyond/domain/manager/auth_manager.dart';
+import 'package:beyond/ui/view_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_view_model.g.dart';
 
 class LoginViewModel = _LoginViewModel with _$LoginViewModel;
 
-abstract class _LoginViewModel with Store {
+abstract class _LoginViewModel extends ViewModel with Store {
   final AuthManager _authManager;
 
   _LoginViewModel(this._authManager);

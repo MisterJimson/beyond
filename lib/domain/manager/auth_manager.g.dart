@@ -36,7 +36,7 @@ mixin _$AuthManager on _AuthManager, Store {
   final _$logoutAsyncAction = AsyncAction('logout');
 
   @override
-  Future logout() {
+  Future<dynamic> logout() {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 

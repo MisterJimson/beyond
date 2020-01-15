@@ -1,3 +1,4 @@
+import 'package:beyond/ui/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:beyond/ui/home/home_view_model.dart';
@@ -10,27 +11,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildCurrentPlace(),
-              SizedBox(height: 10),
-              _buildParks(),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildLogoutButton(),
-                ],
-              ),
-            ],
+    return ViewModelRoot(
+      viewModel: viewModel,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Home"),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildCurrentPlace(),
+                SizedBox(height: 10),
+                _buildParks(),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildLogoutButton(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

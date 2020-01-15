@@ -1,12 +1,13 @@
 import 'package:beyond/domain/models.dart';
 import 'package:beyond/service/api_service.dart';
+import 'package:beyond/ui/view_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'park_detail_view_model.g.dart';
 
 class ParkDetailViewModel = _ParkDetailViewModel with _$ParkDetailViewModel;
 
-abstract class _ParkDetailViewModel with Store {
+abstract class _ParkDetailViewModel extends ViewModel with Store {
   final ApiService _apiService;
   final Park _park;
 

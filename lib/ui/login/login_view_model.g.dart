@@ -70,7 +70,7 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
   final _$loginAsyncAction = AsyncAction('login');
 
   @override
-  Future login() {
+  Future<dynamic> login() {
     return _$loginAsyncAction.run(() => super.login());
   }
 }

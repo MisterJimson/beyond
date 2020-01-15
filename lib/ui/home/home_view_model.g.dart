@@ -86,14 +86,14 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   final _$_getLocationDataAsyncAction = AsyncAction('_getLocationData');
 
   @override
-  Future _getLocationData() {
+  Future<dynamic> _getLocationData() {
     return _$_getLocationDataAsyncAction.run(() => super._getLocationData());
   }
 
   final _$_getCurrentLocationAsyncAction = AsyncAction('_getCurrentLocation');
 
   @override
-  Future _getCurrentLocation(Position position) {
+  Future<dynamic> _getCurrentLocation(Position position) {
     return _$_getCurrentLocationAsyncAction
         .run(() => super._getCurrentLocation(position));
   }
@@ -101,7 +101,7 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   final _$_getNearbyParksAsyncAction = AsyncAction('_getNearbyParks');
 
   @override
-  Future _getNearbyParks(Position position) {
+  Future<dynamic> _getNearbyParks(Position position) {
     return _$_getNearbyParksAsyncAction
         .run(() => super._getNearbyParks(position));
   }

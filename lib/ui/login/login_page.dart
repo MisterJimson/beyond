@@ -1,3 +1,4 @@
+import 'package:beyond/ui/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,24 +14,27 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome"),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 30.0),
-              SvgPicture.asset("assets/welcome.svg", width: 150),
-              SizedBox(height: 45.0),
-              _buildEmail(),
-              SizedBox(height: 25.0),
-              _buildPassword(),
-              SizedBox(height: 35.0),
-              _buildLoginButton(),
-            ],
+    return ViewModelRoot(
+      viewModel: viewModel,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Welcome"),
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 36),
+            child: ListView(
+              children: <Widget>[
+                SizedBox(height: 30.0),
+                SvgPicture.asset("assets/welcome.svg", width: 150),
+                SizedBox(height: 45.0),
+                _buildEmail(),
+                SizedBox(height: 25.0),
+                _buildPassword(),
+                SizedBox(height: 35.0),
+                _buildLoginButton(),
+              ],
+            ),
           ),
         ),
       ),

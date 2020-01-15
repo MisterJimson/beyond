@@ -2,6 +2,7 @@ import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:beyond/domain/models.dart';
 import 'package:beyond/service/location_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
+import 'package:beyond/ui/view_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/service/api_service.dart';
@@ -11,7 +12,7 @@ part 'home_view_model.g.dart';
 
 class HomeViewModel = _HomeViewModel with _$HomeViewModel;
 
-abstract class _HomeViewModel with Store {
+abstract class _HomeViewModel extends ViewModel with Store {
   final AuthManager _authManager;
   final ApiService _apiService;
   final LocationService _locationService;

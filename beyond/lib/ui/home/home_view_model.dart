@@ -2,7 +2,7 @@ import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:beyond/domain/models.dart';
 import 'package:beyond/service/location_service.dart';
 import 'package:beyond/ui/navigation_manager.dart';
-import 'package:beyond/ui/view_model.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:beyond/service/api_service.dart';

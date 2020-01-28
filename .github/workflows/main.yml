@@ -11,10 +11,11 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.12.13+hotfix.7'
-      - run: cd beyond
       - run: flutter pub get
+        working-directory: ./beyond
       - run: flutter test
-      - run: cd ..
-      - run: cd beyond_helpers
+        working-directory: ./beyond
       - run: flutter pub get
+        working-directory: ./beyond_helpers
       - run: flutter test
+        working-directory: ./beyond_helpers

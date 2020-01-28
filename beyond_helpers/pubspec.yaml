@@ -1,0 +1,18 @@
+name: beyond_helpers
+description: Utilities for implementing beyond architecture
+version: 0.0.1
+homepage: https://github.com/MisterJimson/beyond
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  mobx: ^1.0.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

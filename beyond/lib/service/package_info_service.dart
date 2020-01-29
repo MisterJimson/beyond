@@ -1,4 +1,4 @@
-import 'package:beyond/service/service_common.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:package_info/package_info.dart';
 
 class PackageInfoService implements Startable {

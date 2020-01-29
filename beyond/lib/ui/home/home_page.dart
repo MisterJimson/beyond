@@ -1,4 +1,4 @@
-import 'package:beyond/ui/view_model.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:beyond/ui/home/home_view_model.dart';

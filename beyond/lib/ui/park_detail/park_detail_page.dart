@@ -1,5 +1,5 @@
 import 'package:beyond/ui/park_detail/park_detail_view_model.dart';
-import 'package:beyond/ui/view_model.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:flutter/material.dart';
 
 class ParkDetailPage extends StatelessWidget {

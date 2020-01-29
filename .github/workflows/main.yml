@@ -10,6 +10,12 @@ jobs:
       - uses: actions/checkout@v1
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.12.13+hotfix.5'
+          flutter-version: '1.12.13+hotfix.7'
       - run: flutter pub get
+        working-directory: ./beyond
       - run: flutter test
+        working-directory: ./beyond
+      - run: flutter pub get
+        working-directory: ./beyond_helpers
+      - run: flutter test
+        working-directory: ./beyond_helpers

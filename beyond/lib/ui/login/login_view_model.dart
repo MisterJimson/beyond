@@ -1,5 +1,5 @@
 import 'package:beyond/domain/manager/auth_manager.dart';
-import 'package:beyond/ui/view_model.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_view_model.g.dart';

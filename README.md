@@ -12,7 +12,7 @@ It's important to note that this is not meant to prescribe how everyone should w
 1. Get a free API key from https://locationiq.com/
 2. Open `lib/service/config/config.dart` and enter your API key
 ## Beyond Helpers
-[Beyond Helpers](https://github.com/MisterJimson/beyond/tree/feature/helpers-lib/beyond_helpers) is a collections of minor utilities to help with implementing this approach
+[Beyond Helpers](https://github.com/MisterJimson/beyond/tree/master/beyond_helpers) is a collections of minor utilities to help with implementing this approach
 # Architecture Overview
 The rest of this document describes how apps that use this approach are structured and why.
 ## Goals

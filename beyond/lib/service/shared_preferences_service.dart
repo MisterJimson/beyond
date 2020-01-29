@@ -1,4 +1,4 @@
-import 'package:beyond/service/service_common.dart';
+import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService implements Startable {

@@ -51,4 +51,10 @@ mixin _$AuthManager on _AuthManager, Store {
       _$_AuthManagerActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'authState: ${authState.toString()}';
+    return '{$string}';
+  }
 }

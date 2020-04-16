@@ -73,4 +73,11 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
   Future<dynamic> login() {
     return _$loginAsyncAction.run(() => super.login());
   }
+
+  @override
+  String toString() {
+    final string =
+        'username: ${username.toString()},password: ${password.toString()},isLoading: ${isLoading.toString()},isLoginButtonEnabled: ${isLoginButtonEnabled.toString()}';
+    return '{$string}';
+  }
 }

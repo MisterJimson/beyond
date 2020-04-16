@@ -1,0 +1,8 @@
+include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+    await_only_futures: true
+    unnecessary_lambdas: true
+    prefer_interpolation_to_compose_strings: true
+    prefer_adjacent_string_concatenation: true

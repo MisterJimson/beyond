@@ -105,4 +105,11 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     return _$_getNearbyParksAsyncAction
         .run(() => super._getNearbyParks(position));
   }
+
+  @override
+  String toString() {
+    final string =
+        'currentLocation: ${currentLocation.toString()},isCurrentLocationLoading: ${isCurrentLocationLoading.toString()},nearbyParks: ${nearbyParks.toString()},isNearbyParksLoading: ${isNearbyParksLoading.toString()}';
+    return '{$string}';
+  }
 }

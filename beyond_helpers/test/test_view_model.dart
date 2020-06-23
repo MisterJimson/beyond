@@ -7,7 +7,7 @@ class TestViewModel = _TestViewModel with _$TestViewModel;
 
 abstract class _TestViewModel extends ViewModel with Store {
   @observable
-  String testString = "";
+  String testString = '';
 
   @observable
   int testInt = 0;
@@ -17,17 +17,17 @@ abstract class _TestViewModel extends ViewModel with Store {
 
   @action
   void testAction() {
-    testString = "new";
+    testString = 'new';
     testInt++;
   }
 
   void setupReactions() {
     disposers.add(autorun((_) {
-      print("testString is $testString");
+      print('testString is $testString');
     }));
 
     disposers.add(reaction((_) => testInt, (x) {
-      print("testInt is $testInt");
+      print('testInt is $testInt');
     }));
   }
 }

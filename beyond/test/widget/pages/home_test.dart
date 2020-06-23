@@ -36,8 +36,8 @@ void main() {
     await tester.pumpWidget(homePage);
 
     // Assert: Verify UI
-    expect(find.text("42 road"), findsOneWidget);
-    expect(find.text("POI is 10 meters away"), findsOneWidget);
+    expect(find.text('42 road'), findsOneWidget);
+    expect(find.text('POI is 10 meters away'), findsOneWidget);
   });
 
   testWidgets('Display loading shimmer when loading',
@@ -50,7 +50,7 @@ void main() {
         () => ApiResponse(
           200,
           data: [
-            PointOfInterest(lat: "42", lon: "42", name: "POI", distance: 10)
+            PointOfInterest(lat: '42', lon: '42', name: 'POI', distance: 10)
           ],
         ),
       ),
@@ -61,10 +61,10 @@ void main() {
         () => ApiResponse(
           200,
           data: Place(
-            lat: "42",
-            lon: "42",
-            displayName: "Place",
-            address: Address(city: "city", road: "road", houseNumber: "42"),
+            lat: '42',
+            lon: '42',
+            displayName: 'Place',
+            address: Address(city: 'city', road: 'road', houseNumber: '42'),
           ),
         ),
       ),

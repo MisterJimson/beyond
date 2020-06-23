@@ -56,7 +56,7 @@ void main() {
       () async {
     // Arrange
     createSystemUnderTest();
-    when(sharedPreferences.getString("loginToken")).thenReturn("token");
+    when(sharedPreferences.getString('loginToken')).thenReturn('token');
 
     // Act
     auth.loadSavedLogin();
@@ -64,6 +64,6 @@ void main() {
     // Assert
     assert(auth.authState != null);
     assert(auth.authState.isLoggedIn);
-    assert(auth.authState.token == "token");
+    assert(auth.authState.token == 'token');
   });
 }

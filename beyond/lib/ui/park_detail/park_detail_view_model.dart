@@ -13,7 +13,7 @@ abstract class _ParkDetailViewModel extends ViewModel with Store {
 
   String get parkName => _park.name;
 
-  String get distanceFrom => "You are ${_park.distance} meters away";
+  String get distanceFrom => 'You are ${_park.distance} meters away';
 
   String parkImageUrl;
 

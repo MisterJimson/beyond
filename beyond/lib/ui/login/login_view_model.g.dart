@@ -6,68 +6,63 @@ part of 'login_view_model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginViewModel on _LoginViewModel, Store {
   Computed<bool> _$isLoginButtonEnabledComputed;
 
   @override
   bool get isLoginButtonEnabled => (_$isLoginButtonEnabledComputed ??=
-          Computed<bool>(() => super.isLoginButtonEnabled))
+          Computed<bool>(() => super.isLoginButtonEnabled,
+              name: '_LoginViewModel.isLoginButtonEnabled'))
       .value;
 
   final _$usernameAtom = Atom(name: '_LoginViewModel.username');
 
   @override
   String get username {
-    _$usernameAtom.context.enforceReadPolicy(_$usernameAtom);
-    _$usernameAtom.reportObserved();
+    _$usernameAtom.reportRead();
     return super.username;
   }
 
   @override
   set username(String value) {
-    _$usernameAtom.context.conditionallyRunInAction(() {
+    _$usernameAtom.reportWrite(value, super.username, () {
       super.username = value;
-      _$usernameAtom.reportChanged();
-    }, _$usernameAtom, name: '${_$usernameAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_LoginViewModel.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
   }
 
   final _$isLoadingAtom = Atom(name: '_LoginViewModel.isLoading');
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
-  final _$loginAsyncAction = AsyncAction('login');
+  final _$loginAsyncAction = AsyncAction('_LoginViewModel.login');
 
   @override
   Future<dynamic> login() {
@@ -76,8 +71,11 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
 
   @override
   String toString() {
-    final string =
-        'username: ${username.toString()},password: ${password.toString()},isLoading: ${isLoading.toString()},isLoginButtonEnabled: ${isLoginButtonEnabled.toString()}';
-    return '{$string}';
+    return '''
+username: ${username},
+password: ${password},
+isLoading: ${isLoading},
+isLoginButtonEnabled: ${isLoginButtonEnabled}
+    ''';
   }
 }

@@ -7,7 +7,7 @@ part 'auth_manager.g.dart';
 class AuthManager = _AuthManager with _$AuthManager;
 
 abstract class _AuthManager with Store {
-  static const loginTokenKey = "loginToken";
+  static const loginTokenKey = 'loginToken';
 
   final ApiService _api;
   final SharedPreferencesService _sharedPreferencesService;
@@ -45,7 +45,7 @@ abstract class _AuthManager with Store {
   @action
   Future logout() async {
     _api.token = null;
-    await _sharedPreferencesService.setString(loginTokenKey, "");
+    await _sharedPreferencesService.setString(loginTokenKey, '');
     authState = AuthState();
   }
 }
@@ -65,8 +65,8 @@ class AuthState {
     }
 
     return other is AuthState &&
-        this.token == other.token &&
-        this.isLoggedIn == other.isLoggedIn;
+        token == other.token &&
+        isLoggedIn == other.isLoggedIn;
   }
 
   @override

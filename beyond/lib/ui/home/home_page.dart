@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       viewModel: viewModel,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Home"),
+          title: Text('Home'),
         ),
         body: SafeArea(
           child: Padding(
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Nearby Parks",
+                  'Nearby Parks',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Current Location",
+              'Current Location',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Text(
-        "LOGOUT",
+        'LOGOUT',
         textAlign: TextAlign.center,
       ),
     );

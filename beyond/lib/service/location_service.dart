@@ -1,7 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
-  Geolocator _geolocator = Geolocator();
+  final Geolocator _geolocator = Geolocator();
 
   Future<Position> getCurrentPosition(
       {LocationAccuracy desiredAccuracy = LocationAccuracy.best,

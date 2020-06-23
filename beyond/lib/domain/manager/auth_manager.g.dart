@@ -6,34 +6,32 @@ part of 'auth_manager.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthManager on _AuthManager, Store {
   final _$authStateAtom = Atom(name: '_AuthManager.authState');
 
   @override
   AuthState get authState {
-    _$authStateAtom.context.enforceReadPolicy(_$authStateAtom);
-    _$authStateAtom.reportObserved();
+    _$authStateAtom.reportRead();
     return super.authState;
   }
 
   @override
   set authState(AuthState value) {
-    _$authStateAtom.context.conditionallyRunInAction(() {
+    _$authStateAtom.reportWrite(value, super.authState, () {
       super.authState = value;
-      _$authStateAtom.reportChanged();
-    }, _$authStateAtom, name: '${_$authStateAtom.name}_set');
+    });
   }
 
-  final _$loginAsyncAction = AsyncAction('login');
+  final _$loginAsyncAction = AsyncAction('_AuthManager.login');
 
   @override
   Future<LoginResponse> login(String username, String password) {
     return _$loginAsyncAction.run(() => super.login(username, password));
   }
 
-  final _$logoutAsyncAction = AsyncAction('logout');
+  final _$logoutAsyncAction = AsyncAction('_AuthManager.logout');
 
   @override
   Future<dynamic> logout() {
@@ -44,7 +42,8 @@ mixin _$AuthManager on _AuthManager, Store {
 
   @override
   void loadSavedLogin() {
-    final _$actionInfo = _$_AuthManagerActionController.startAction();
+    final _$actionInfo = _$_AuthManagerActionController.startAction(
+        name: '_AuthManager.loadSavedLogin');
     try {
       return super.loadSavedLogin();
     } finally {
@@ -54,7 +53,8 @@ mixin _$AuthManager on _AuthManager, Store {
 
   @override
   String toString() {
-    final string = 'authState: ${authState.toString()}';
-    return '{$string}';
+    return '''
+authState: ${authState}
+    ''';
   }
 }

@@ -54,16 +54,16 @@ class MockPackageInfoService extends Mock implements PackageInfoService {}
 
 void setupApiStubs(ApiService api) {
   when(api.getAuthToken(any, any))
-      .thenAnswer((_) => Future.value(ApiResponse(200, data: "token")));
+      .thenAnswer((_) => Future.value(ApiResponse(200, data: 'token')));
   when(api.getPlace(any, any)).thenAnswer(
     (_) => Future.value(
       ApiResponse(
         200,
         data: Place(
-          lat: "42",
-          lon: "42",
-          displayName: "Place",
-          address: Address(city: "city", road: "road", houseNumber: "42"),
+          lat: '42',
+          lon: '42',
+          displayName: 'Place',
+          address: Address(city: 'city', road: 'road', houseNumber: '42'),
         ),
       ),
     ),
@@ -73,7 +73,7 @@ void setupApiStubs(ApiService api) {
       ApiResponse(
         200,
         data: [
-          PointOfInterest(lat: "42", lon: "42", name: "POI", distance: 10)
+          PointOfInterest(lat: '42', lon: '42', name: 'POI', distance: 10)
         ],
       ),
     ),
@@ -87,7 +87,7 @@ void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
 
 void setupLocationStubs(LocationService locationService) {
   when(locationService.getCurrentPosition(
-          locationPermissionLevel: anyNamed("locationPermissionLevel"),
-          desiredAccuracy: anyNamed("desiredAccuracy")))
+          locationPermissionLevel: anyNamed('locationPermissionLevel'),
+          desiredAccuracy: anyNamed('desiredAccuracy')))
       .thenAnswer((_) => Future.value(Position(latitude: 42, longitude: 42)));
 }

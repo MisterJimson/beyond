@@ -18,7 +18,7 @@ void main() {
 
     // ViewModel should start inactive, no reactions setup
     expect(viewModel.disposers.length, 0);
-    expect(find.text("0"), findsOneWidget);
+    expect(find.text('0'), findsOneWidget);
 
     // Setup reactions, ensure we have them in disposers list
     viewModel.setupReactions();
@@ -27,10 +27,10 @@ void main() {
     // Use reactions and ensure they work
     viewModel.testAction();
     await tester.pump();
-    expect(find.text("new1"), findsOneWidget);
+    expect(find.text('new1'), findsOneWidget);
 
     // Navigate away from the current page, triggering dispose on ViewModelRoot
-    await tester.tap(find.widgetWithText(RaisedButton, "Navigate Away"));
+    await tester.tap(find.widgetWithText(RaisedButton, 'Navigate Away'));
     await tester.pumpAndSettle();
 
     // Ensure we called dispose on all disposers
@@ -57,7 +57,7 @@ class _TestPage extends StatelessWidget {
               },
             ),
             RaisedButton(
-              child: Text("Navigate Away"),
+              child: Text('Navigate Away'),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => Container()),

@@ -19,7 +19,7 @@ abstract class _HomeViewModel extends ViewModel with Store {
   final NavigationManager _navigationManager;
 
   @observable
-  String currentLocation = "";
+  String currentLocation = '';
 
   @observable
   bool isCurrentLocationLoading = true;
@@ -70,7 +70,7 @@ abstract class _HomeViewModel extends ViewModel with Store {
   Future _getNearbyParks(Position position) async {
     isNearbyParksLoading = true;
     var x = await _apiService.getPointsOfInterest(
-        position.longitude, position.latitude, "park");
+        position.longitude, position.latitude, 'park');
     if (x.isSuccess) {
       nearbyParks = x.data
           .where((x) => x.name != null)
@@ -91,5 +91,5 @@ class ParkListItem {
 
   ParkListItem(this.park);
 
-  String get nameAndDistance => "${park.name} is ${park.distance} meters away";
+  String get nameAndDistance => '${park.name} is ${park.distance} meters away';
 }

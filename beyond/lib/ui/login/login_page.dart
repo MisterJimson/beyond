@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
       viewModel: viewModel,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Welcome"),
+          title: Text('Welcome'),
         ),
         body: Center(
           child: Padding(
@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 SizedBox(height: 30.0),
-                SvgPicture.asset("assets/welcome.svg", width: 150),
+                SvgPicture.asset('assets/welcome.svg', width: 150),
                 SizedBox(height: 45.0),
                 _buildEmail(),
                 SizedBox(height: 25.0),
@@ -46,8 +46,7 @@ class LoginPage extends StatelessWidget {
       builder: (_) {
         return RaisedButton(
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed:
-              viewModel.isLoginButtonEnabled ? viewModel.login : null,
+          onPressed: viewModel.isLoginButtonEnabled ? viewModel.login : null,
           color: Colors.blue,
           textColor: Colors.white,
           shape: RoundedRectangleBorder(
@@ -64,7 +63,7 @@ class LoginPage extends StatelessWidget {
               );
             } else {
               return Text(
-                "LOGIN",
+                'LOGIN',
                 textAlign: TextAlign.center,
               );
             }
@@ -76,12 +75,12 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildPassword() {
     return TextField(
-      key: Key("passwordField"),
+      key: Key('passwordField'),
       obscureText: true,
       onChanged: (x) => viewModel.password = x,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Password",
+        hintText: 'Password',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),
@@ -91,12 +90,12 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildEmail() {
     return TextField(
-      key: Key("emailField"),
+      key: Key('emailField'),
       obscureText: false,
       onChanged: (x) => viewModel.username = x,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Email",
+        hintText: 'Email',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),

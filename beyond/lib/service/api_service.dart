@@ -17,12 +17,12 @@ class ApiService {
   /// This performs a fake login for demo purposes
   Future<ApiResponse<String>> getAuthToken(String username, String password) {
     return Future.delayed(
-        Duration(milliseconds: 500), () => ApiResponse(200, data: "token"));
+        Duration(milliseconds: 500), () => ApiResponse(200, data: 'token'));
   }
 
   Future<ApiResponse<Place>> getPlace(double longitude, double latitude) async {
     var response = await http.get(
-      "https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json",
+      'https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json',
       headers: getHeaders(),
     );
 
@@ -38,14 +38,13 @@ class ApiService {
       double longitude, double latitude, String type,
       {int radius = 500}) async {
     var response = await http.get(
-      "https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json",
+      'https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json',
       headers: getHeaders(),
     );
 
     if (_isSuccessStatusCode(response.statusCode)) {
       Iterable list = json.decode(response.body);
-      List<PointOfInterest> data =
-          list.map((x) => PointOfInterest.fromJson(x)).toList();
+      var data = list.map((x) => PointOfInterest.fromJson(x)).toList();
       return ApiResponse(response.statusCode, data: data);
     } else {
       return ApiResponse(response.statusCode, error: response.body);
@@ -53,15 +52,15 @@ class ApiService {
   }
 
   String getStaticMapImageUrl(String longitude, String latitude) {
-    return "https://maps.locationiq.com/v2/staticmap?key=${_configService.locationIqApiKey}&size=600x600&zoom=17&markers=$latitude,$longitude|icon:large-blue-cutout;&format=png";
+    return 'https://maps.locationiq.com/v2/staticmap?key=${_configService.locationIqApiKey}&size=600x600&zoom=17&markers=$latitude,$longitude|icon:large-blue-cutout;&format=png';
   }
 
   /// It is common practice to send some app information as headers on API requests
   /// This can help you analyze usage in the field
   Map<String, String> getHeaders() {
     return {
-      "Version": _packageInfoService.version,
-      "BuildNumber": _packageInfoService.buildNumber,
+      'Version': _packageInfoService.version,
+      'BuildNumber': _packageInfoService.buildNumber,
     };
   }
 }
@@ -98,23 +97,23 @@ class Place {
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
-        placeId: json["place_id"],
-        licence: json["licence"],
-        lat: json["lat"],
-        lon: json["lon"],
-        displayName: json["display_name"],
-        importance: json["importance"].toDouble(),
-        address: Address.fromJson(json["address"]),
+        placeId: json['place_id'],
+        licence: json['licence'],
+        lat: json['lat'],
+        lon: json['lon'],
+        displayName: json['display_name'],
+        importance: json['importance'].toDouble(),
+        address: Address.fromJson(json['address']),
       );
 
   Map<String, dynamic> toJson() => {
-        "place_id": placeId,
-        "licence": licence,
-        "lat": lat,
-        "lon": lon,
-        "display_name": displayName,
-        "importance": importance,
-        "address": address.toJson(),
+        'place_id': placeId,
+        'licence': licence,
+        'lat': lat,
+        'lon': lon,
+        'display_name': displayName,
+        'importance': importance,
+        'address': address.toJson(),
       };
 }
 
@@ -140,25 +139,25 @@ class Address {
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-        houseNumber: json["house_number"],
-        road: json["road"],
-        city: json["city"],
-        county: json["county"],
-        state: json["state"],
-        postcode: json["postcode"],
-        country: json["country"],
-        countryCode: json["country_code"],
+        houseNumber: json['house_number'],
+        road: json['road'],
+        city: json['city'],
+        county: json['county'],
+        state: json['state'],
+        postcode: json['postcode'],
+        country: json['country'],
+        countryCode: json['country_code'],
       );
 
   Map<String, dynamic> toJson() => {
-        "house_number": houseNumber,
-        "road": road,
-        "city": city,
-        "county": county,
-        "state": state,
-        "postcode": postcode,
-        "country": country,
-        "country_code": countryCode,
+        'house_number': houseNumber,
+        'road': road,
+        'city': city,
+        'county': county,
+        'state': state,
+        'postcode': postcode,
+        'country': country,
+        'country_code': countryCode,
       };
 }
 
@@ -179,18 +178,18 @@ class PointOfInterest {
 
   factory PointOfInterest.fromJson(Map<String, dynamic> json) =>
       PointOfInterest(
-        lat: json["lat"],
-        lon: json["lon"],
-        tagType: json["tag_type"],
-        name: json["name"],
-        distance: json["distance"],
+        lat: json['lat'],
+        lon: json['lon'],
+        tagType: json['tag_type'],
+        name: json['name'],
+        distance: json['distance'],
       );
 
   Map<String, dynamic> toJson() => {
-        "lat": lat,
-        "lon": lon,
-        "tag_type": tagType,
-        "name": name,
-        "distance": distance,
+        'lat': lat,
+        'lon': lon,
+        'tag_type': tagType,
+        'name': name,
+        'distance': distance,
       };
 }

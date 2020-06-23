@@ -12,10 +12,10 @@ abstract class _LoginViewModel extends ViewModel with Store {
   _LoginViewModel(this._authManager);
 
   @observable
-  String username = "";
+  String username = '';
 
   @observable
-  String password = "";
+  String password = '';
 
   @observable
   bool isLoading = false;

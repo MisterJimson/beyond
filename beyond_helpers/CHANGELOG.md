@@ -1,3 +1,9 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.0+1] - June 23, 2020
 
-* TODO: Describe initial release.
+* Documentation fixes
+
+## [1.0.0] - June 23, 2020
+
+* Add ViewModel to help collect ReactionDisposers from Mobx to dispose cleanly
+* Add ViewModelRoot Widget to automatically dispose a ViewModel when its no longer needed
+* Added Startable interface to define a common async initialization method

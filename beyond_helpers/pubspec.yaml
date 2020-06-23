@@ -1,6 +1,6 @@
 name: beyond_helpers
-description: Utilities for implementing beyond architecture
-version: 0.0.1
+description: Utilities for implementing beyond architecture patterns
+version: 1.0.0+1
 homepage: https://github.com/MisterJimson/beyond
 
 environment:

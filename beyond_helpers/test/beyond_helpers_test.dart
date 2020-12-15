@@ -59,7 +59,7 @@ class _TestPage extends StatelessWidget {
             RaisedButton(
               child: Text('Navigate Away'),
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
+                Navigator.of(context)!.pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => Container()),
                   (Route<dynamic> route) => false,
                 );

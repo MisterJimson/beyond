@@ -1,3 +1,7 @@
+## [2.0.0-nullsafety.0] - December 15, 2020
+
+* Null safety migration
+
 ## [1.0.0+1] - June 23, 2020
 
 * Documentation fixes

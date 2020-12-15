@@ -26,7 +26,7 @@ abstract class _TestViewModel extends ViewModel with Store {
       print('testString is $testString');
     }));
 
-    disposers.add(reaction((_) => testInt, (x) {
+    disposers.add(reaction<int>((_) => testInt, (int x) {
       print('testInt is $testInt');
     }));
   }

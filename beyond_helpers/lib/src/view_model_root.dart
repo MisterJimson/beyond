@@ -9,9 +9,9 @@ class ViewModelRoot extends StatefulWidget {
   final Widget child;
 
   const ViewModelRoot({
-    Key key,
-    @required this.viewModel,
-    @required this.child,
+    Key? key,
+    required this.viewModel,
+    required this.child,
   }) : super(key: key);
 
   @override

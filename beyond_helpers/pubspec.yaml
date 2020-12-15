@@ -2,18 +2,19 @@ name: beyond_helpers
 description: Utilities for implementing beyond architecture patterns
 version: 1.0.0+1
 homepage: https://github.com/MisterJimson/beyond
+repository: https://github.com/MisterJimson/beyond
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
-  mobx: ^1.2.1+1
+  mobx: ^1.2.1+4
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  pedantic: ^1.9.0
-  flutter_mobx: ^1.1.0+1
+  pedantic: ^1.9.2
+  flutter_mobx: ^1.1.0+2
   flutter_test:
     sdk: flutter
 

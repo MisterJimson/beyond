@@ -87,7 +87,6 @@ void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
 
 void setupLocationStubs(LocationService locationService) {
   when(locationService.getCurrentPosition(
-          locationPermissionLevel: anyNamed('locationPermissionLevel'),
           desiredAccuracy: anyNamed('desiredAccuracy')))
       .thenAnswer((_) => Future.value(Position(latitude: 42, longitude: 42)));
 }

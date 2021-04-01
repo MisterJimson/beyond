@@ -12,6 +12,8 @@ import 'package:beyond/ui/navigation_manager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 
+import 'data.dart';
+
 // This file contains our TestServiceLocator, our Mock classes
 // and some basic stubs that are useful for most tests.
 
@@ -61,12 +63,7 @@ void setupApiStubs(ApiService api) {
     (_) => Future.value(
       ApiResponse(
         200,
-        data: Place(
-          lat: '42',
-          lon: '42',
-          displayName: 'Place',
-          address: Address(city: 'city', road: 'road', houseNumber: '42'),
-        ),
+        data: TestData.place,
       ),
     ),
   );
@@ -75,7 +72,7 @@ void setupApiStubs(ApiService api) {
       ApiResponse(
         200,
         data: [
-          PointOfInterest(lat: '42', lon: '42', name: 'POI', distance: 10)
+          TestData.pointOfInterest,
         ],
       ),
     ),

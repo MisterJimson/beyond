@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../data.dart';
 import '../../mocks.dart';
 
 // These tests focus on the HomePage and the HomeViewModel
@@ -51,24 +52,14 @@ void main() {
         Duration(seconds: 1),
         () => ApiResponse(
           200,
-          data: [
-            PointOfInterest(lat: '42', lon: '42', name: 'POI', distance: 10)
-          ],
+          data: [TestData.pointOfInterest],
         ),
       ),
     );
     when(serviceLocator.apiService.getPlace(any, any)).thenAnswer(
       (_) => Future.delayed(
         Duration(seconds: 1),
-        () => ApiResponse(
-          200,
-          data: Place(
-            lat: '42',
-            lon: '42',
-            displayName: 'Place',
-            address: Address(city: 'city', road: 'road', houseNumber: '42'),
-          ),
-        ),
+        () => ApiResponse(200, data: TestData.place),
       ),
     );
     createSystemUnderTest();

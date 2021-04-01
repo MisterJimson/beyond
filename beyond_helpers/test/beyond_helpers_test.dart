@@ -30,7 +30,7 @@ void main() {
     expect(find.text('new1'), findsOneWidget);
 
     // Navigate away from the current page, triggering dispose on ViewModelRoot
-    await tester.tap(find.widgetWithText(RaisedButton, 'Navigate Away'));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Navigate Away'));
     await tester.pumpAndSettle();
 
     // Ensure we called dispose on all disposers
@@ -56,14 +56,14 @@ class _TestPage extends StatelessWidget {
                 return Text(viewModel.testComputed);
               },
             ),
-            RaisedButton(
-              child: Text('Navigate Away'),
+            ElevatedButton(
               onPressed: () {
-                Navigator.of(context)!.pushAndRemoveUntil(
+                Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => Container()),
                   (Route<dynamic> route) => false,
                 );
               },
+              child: Text('Navigate Away'),
             )
           ],
         ),

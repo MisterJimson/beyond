@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:equatable/equatable.dart';
 import 'package:beyond/service/api_service.dart';
 import 'package:beyond/service/shared_preferences_service.dart';
 
@@ -13,7 +14,7 @@ abstract class _AuthManager with Store {
   final SharedPreferencesService _sharedPreferencesService;
 
   @observable
-  AuthState authState;
+  AuthState? authState;
 
   _AuthManager(this._api, this._sharedPreferencesService);
 
@@ -31,9 +32,8 @@ abstract class _AuthManager with Store {
   @action
   Future<LoginResponse> login(String username, String password) async {
     var authTokenResult = await _api.getAuthToken(username, password);
-
-    if (authTokenResult.isSuccess) {
-      var token = authTokenResult.data;
+    var token = authTokenResult.data;
+    if (authTokenResult.isSuccess && token != null) {
       authState = AuthState(token);
       await _sharedPreferencesService.setString(loginTokenKey, token);
       return LoginResponse.success();
@@ -45,39 +45,26 @@ abstract class _AuthManager with Store {
   @action
   Future logout() async {
     _api.token = null;
-    await _sharedPreferencesService.setString(loginTokenKey, '');
+    await _sharedPreferencesService.remove(loginTokenKey);
     authState = AuthState();
   }
 }
 
-class AuthState {
-  String token;
-  bool isLoggedIn;
+class AuthState extends Equatable {
+  late final String? token;
+  late final bool isLoggedIn;
+
+  @override
+  List<Object?> get props => [token, isLoggedIn];
 
   AuthState([this.token]) {
     isLoggedIn = token != null;
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-
-    return other is AuthState &&
-        token == other.token &&
-        isLoggedIn == other.isLoggedIn;
-  }
-
-  @override
-  int get hashCode {
-    return isLoggedIn.hashCode + (token?.hashCode ?? 0);
-  }
 }
 
 class LoginResponse {
-  bool isSuccess;
-  LoginFailure failure;
+  late bool isSuccess;
+  LoginFailure? failure;
 
   LoginResponse.success() {
     isSuccess = true;

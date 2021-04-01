@@ -15,7 +15,7 @@ abstract class _ParkDetailViewModel extends ViewModel with Store {
 
   String get distanceFrom => 'You are ${_park.distance} meters away';
 
-  String parkImageUrl;
+  late String parkImageUrl;
 
   _ParkDetailViewModel(this._park, this._apiService) {
     parkImageUrl = _apiService.getStaticMapImageUrl(_park.lon, _park.lat);

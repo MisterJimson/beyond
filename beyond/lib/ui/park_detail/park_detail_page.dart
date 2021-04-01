@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ParkDetailPage extends StatelessWidget {
   final ParkDetailViewModel viewModel;
 
-  const ParkDetailPage(this.viewModel, {Key key}) : super(key: key);
+  const ParkDetailPage(this.viewModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,10 @@ class ParkDetailPage extends StatelessWidget {
                     return child;
                   }
                   return AnimatedOpacity(
-                    child: child,
                     opacity: frame == null ? 0 : 1,
                     duration: const Duration(seconds: 1),
                     curve: Curves.easeOut,
+                    child: child,
                   );
                 },
               ),

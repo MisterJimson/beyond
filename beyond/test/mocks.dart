@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:beyond/infra/service_locator.dart';
 import 'package:beyond/infra/view_model_factory.dart';
@@ -88,5 +90,18 @@ void setupSharedPreferencesStubs(SharedPreferencesService sharedPreferences) {
 void setupLocationStubs(LocationService locationService) {
   when(locationService.getCurrentPosition(
           desiredAccuracy: anyNamed('desiredAccuracy')))
-      .thenAnswer((_) => Future.value(Position(latitude: 42, longitude: 42)));
+      .thenAnswer(
+    (_) => Future.value(
+      Position(
+        latitude: 42,
+        longitude: 42,
+        accuracy: 12.12,
+        speed: 23.23,
+        speedAccuracy: 42.0,
+        heading: 34.68,
+        altitude: 32.77,
+        timestamp: DateTime.now(),
+      ),
+    ),
+  );
 }

@@ -4,5 +4,10 @@ class Park {
   String lat;
   String lon;
 
-  Park({this.name, this.distance, this.lat, this.lon});
+  Park({
+    required this.name,
+    required this.distance,
+    required this.lat,
+    required this.lon,
+  });
 }

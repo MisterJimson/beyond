@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:beyond/service/api_service.dart';
 import 'package:beyond/service/config/config.dart';
 import 'package:flutter_test/flutter_test.dart';

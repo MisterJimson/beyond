@@ -2,7 +2,7 @@ import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:package_info/package_info.dart';
 
 class PackageInfoService implements Startable {
-  PackageInfo packageInfo;
+  late PackageInfo packageInfo;
 
   @override
   Future start() async {

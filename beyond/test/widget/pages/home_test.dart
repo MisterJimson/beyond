@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:beyond/service/api_service.dart';
 import 'package:beyond/ui/home/home_page.dart';
 import 'package:beyond/ui/home/home_view_model.dart';

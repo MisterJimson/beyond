@@ -11,20 +11,20 @@ import 'package:flutter/foundation.dart';
 
 class ServiceLocator implements Startable {
   /// Services
-  ConfigService configService;
-  ApiService apiService;
-  SharedPreferencesService sharedPreferencesService;
-  LocationService locationService;
-  PackageInfoService packageInfoService;
+  late ConfigService configService;
+  late ApiService apiService;
+  late SharedPreferencesService sharedPreferencesService;
+  late LocationService locationService;
+  late PackageInfoService packageInfoService;
 
   /// UI
-  NavigationManager navigationManager;
+  late NavigationManager navigationManager;
 
   /// Infra
-  ViewModelFactory viewModelFactory;
+  late ViewModelFactory viewModelFactory;
 
   /// Global State
-  AuthManager authManager;
+  late AuthManager authManager;
 
   /// Creates a new container for our services and instantiates them
   ServiceLocator() {

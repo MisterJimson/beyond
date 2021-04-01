@@ -44,24 +44,18 @@ abstract class _HomeViewModel extends ViewModel with Store {
     var position = await _locationService.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.medium);
 
-    if (position != null &&
-        position.latitude != null &&
-        position.longitude != null) {
-      unawaited(_getCurrentLocation(position));
-      unawaited(_getNearbyParks(position));
-    } else {
-      isCurrentLocationLoading = false;
-      isNearbyParksLoading = false;
-    }
+    unawaited(_getCurrentLocation(position));
+    unawaited(_getNearbyParks(position));
   }
 
   @action
   Future _getCurrentLocation(Position position) async {
     isCurrentLocationLoading = true;
-    var x = await _apiService.getPlace(position.longitude, position.latitude);
-    if (x.isSuccess) {
-      currentLocation =
-          "${x.data.address.houseNumber ?? ""} ${x.data.address.road}";
+    var getPlaceResponse =
+        await _apiService.getPlace(position.longitude, position.latitude);
+    var data = getPlaceResponse.data;
+    if (getPlaceResponse.isSuccess && data != null) {
+      currentLocation = '${data.address.houseNumber} ${data.address.road}';
     }
     isCurrentLocationLoading = false;
   }
@@ -69,11 +63,11 @@ abstract class _HomeViewModel extends ViewModel with Store {
   @action
   Future _getNearbyParks(Position position) async {
     isNearbyParksLoading = true;
-    var x = await _apiService.getPointsOfInterest(
+    var getPointsOfInterestResponse = await _apiService.getPointsOfInterest(
         position.longitude, position.latitude, 'park');
-    if (x.isSuccess) {
-      nearbyParks = x.data
-          .where((x) => x.name != null)
+    var data = getPointsOfInterestResponse.data;
+    if (getPointsOfInterestResponse.isSuccess && data != null) {
+      nearbyParks = data
           .map((x) => ParkListItem(
               Park(name: x.name, distance: x.distance, lat: x.lat, lon: x.lon)))
           .toList();

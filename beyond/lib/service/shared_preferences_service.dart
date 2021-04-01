@@ -2,7 +2,7 @@ import 'package:beyond_helpers/beyond_helpers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService implements Startable {
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   @override
   Future start() async {
@@ -13,7 +13,11 @@ class SharedPreferencesService implements Startable {
     return prefs.setString(key, value);
   }
 
-  String getString(String key) {
+  String? getString(String key) {
     return prefs.getString(key);
+  }
+
+  Future<bool> remove(String key) {
+    return prefs.remove(key);
   }
 }

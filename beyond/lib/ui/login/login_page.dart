@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
 
   const LoginPage(
     this.viewModel, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

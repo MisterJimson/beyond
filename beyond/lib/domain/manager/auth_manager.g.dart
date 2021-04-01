@@ -12,13 +12,13 @@ mixin _$AuthManager on _AuthManager, Store {
   final _$authStateAtom = Atom(name: '_AuthManager.authState');
 
   @override
-  AuthState get authState {
+  AuthState? get authState {
     _$authStateAtom.reportRead();
     return super.authState;
   }
 
   @override
-  set authState(AuthState value) {
+  set authState(AuthState? value) {
     _$authStateAtom.reportWrite(value, super.authState, () {
       super.authState = value;
     });

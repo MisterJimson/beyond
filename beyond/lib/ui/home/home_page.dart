@@ -7,7 +7,7 @@ import 'package:shimmer/shimmer.dart';
 class HomePage extends StatelessWidget {
   final HomeViewModel viewModel;
 
-  const HomePage(this.viewModel, {Key key}) : super(key: key);
+  const HomePage(this.viewModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,13 +113,13 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: verticalPadding),
       child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade200,
+        highlightColor: Colors.white,
         child: Container(
           color: Colors.white,
           width: shimmerWidth,
           height: 17,
         ),
-        baseColor: Colors.grey[200],
-        highlightColor: Colors.white,
       ),
     );
   }

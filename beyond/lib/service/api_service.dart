@@ -10,7 +10,7 @@ class ApiService {
 
   /// This fake token for example purposes demonstrates the minimal amount of
   /// state we should store in services
-  String token;
+  String? token;
 
   ApiService(this._configService, this._packageInfoService);
 
@@ -22,7 +22,8 @@ class ApiService {
 
   Future<ApiResponse<Place>> getPlace(double longitude, double latitude) async {
     var response = await http.get(
-      'https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json',
+      Uri.parse(
+          'https://us1.locationiq.com/v1/reverse.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&format=json'),
       headers: getHeaders(),
     );
 
@@ -38,7 +39,8 @@ class ApiService {
       double longitude, double latitude, String type,
       {int radius = 500}) async {
     var response = await http.get(
-      'https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json',
+      Uri.parse(
+          'https://us1.locationiq.com/v1/nearby.php?key=${_configService.locationIqApiKey}&lat=$latitude&lon=$longitude&tag=$type&radius=$radius&format=json'),
       headers: getHeaders(),
     );
 
@@ -69,8 +71,8 @@ bool _isSuccessStatusCode(int code) => (code >= 200 && code < 300);
 
 class ApiResponse<T> {
   final int statusCode;
-  T data;
-  String error;
+  T? data;
+  String? error;
 
   bool get isSuccess => _isSuccessStatusCode(statusCode);
 
@@ -87,13 +89,13 @@ class Place {
   Address address;
 
   Place({
-    this.placeId,
-    this.licence,
-    this.lat,
-    this.lon,
-    this.displayName,
-    this.importance,
-    this.address,
+    required this.placeId,
+    required this.licence,
+    required this.lat,
+    required this.lon,
+    required this.displayName,
+    required this.importance,
+    required this.address,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
@@ -128,14 +130,14 @@ class Address {
   String countryCode;
 
   Address({
-    this.houseNumber,
-    this.road,
-    this.city,
-    this.county,
-    this.state,
-    this.postcode,
-    this.country,
-    this.countryCode,
+    required this.houseNumber,
+    required this.road,
+    required this.city,
+    required this.county,
+    required this.state,
+    required this.postcode,
+    required this.country,
+    required this.countryCode,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
@@ -169,11 +171,11 @@ class PointOfInterest {
   int distance;
 
   PointOfInterest({
-    this.lat,
-    this.lon,
-    this.tagType,
-    this.name,
-    this.distance,
+    required this.lat,
+    required this.lon,
+    required this.tagType,
+    required this.name,
+    required this.distance,
   });
 
   factory PointOfInterest.fromJson(Map<String, dynamic> json) =>
@@ -181,7 +183,7 @@ class PointOfInterest {
         lat: json['lat'],
         lon: json['lon'],
         tagType: json['tag_type'],
-        name: json['name'],
+        name: json['name'] ?? 'Unknown',
         distance: json['distance'],
       );
 

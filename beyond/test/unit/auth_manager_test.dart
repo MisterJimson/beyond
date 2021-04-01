@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:beyond/domain/manager/auth_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
